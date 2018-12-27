@@ -32,10 +32,10 @@ Rich Hickey <br/>
 author of Clojure and CTO Cognitect
 
 But what is it really?  
-On the most fundamental level Clojure is just a java program.  
+On the most fundamental level Clojure is just a Java program.  
 Before we even begin we should get `java`.  
 
-# Java & Getting java
+# Getting Java
 
 We will get ourselves an OpenJDK implementation of Java 11.
 
@@ -60,14 +60,14 @@ Writing web request ...
 
 # load up .NET stuff for extracting Zips into PowerShell (no need to understand)
 PS C:\Users\adas\clojure> Add-Type -AssemblyName System.IO.Compression.FileSystem 
+# we extract the zip we just downloaded
+PS C:\Users\adas\clojure> [System.IO.Compression.ZipFile]::ExtractToDirectory((Join-Path $PWD "java11.zip"),$PWD) 
 
-PS C:\Users\adas\clojure> $zip = Join-Path $PWD "java11.zip" # build a path for the zip
+# rename the extracted directory to java11
+PS C:\Users\adas\clojure> mv jdk-11.0.1 java11 
 
-PS C:\Users\adas\clojure> [System.IO.Compression.ZipFile]::ExtractToDirectory($zip,$PWD) # extracts the java zip
-
-PS C:\Users\adas\clojure> mv jdk-11.0.1 java11 # rename the contents to java11
-
-PS C:\Users\adas\clojure> rm java11.zip # we don't need the zip anymore
+# we don't need the zip anymore
+PS C:\Users\adas\clojure> rm java11.zip 
 
 PS C:\Users\adas\clojure> java11\bin\java -version # make sure the binary works
 openjdk version "11.0.1" 318-1-16 # it does
@@ -83,7 +83,7 @@ openjdk version "11.0.1" 318-1-16 # it did
 Great, `java` is ready.
 
 # Getting clojure
-Now we can finally get ourselves _clojure_. Like most java programs it ships as a JAR.  
+Now we can finally get ourselves _clojure_. Like most Java programs it ships as a JAR.  
 JARs are basically ZIP files.  
 Most code and code-like stuff in the Java world is distributed as JARs.  
 So let's get a JAR for clojure.
