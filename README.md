@@ -142,8 +142,8 @@ PS C:\Users\adas\clojure> tree jar-disassembly # let's see the general dir struc
 
  PS C:\Users\adas\clojure> java -cp clojure.jar clojure.main
  Clojure 1.8.0
- user=> "Nice, clojure.main starts a Clojure repl!"
-"Nice, clojure.main starts a Clojure repl!"
+ user=> "Nice, clojure.main starts a Clojure REPL!"
+"Nice, clojure.main starts a Clojure REPL!"
  user=> "Let's Ctrl-C out of here"
 
 # Actually JAR's META-INF/MANIFEST.MF will usually specify a default Main-Class, here clojure.main
@@ -278,7 +278,7 @@ nil
 user=> *ns* ;; special symbol *ns* contains the current namespace
 #object[clojure.lang.Namespace 0xf8908f6 "user"]
 
-;; this is why we're seeing this "user" thing in our repl indicating the current namespace
+;; this is why we're seeing this "user" thing in our REPL indicating the current namespace
 user=> (ns other) ;; we jump to a differnt ns
 nil
 
@@ -299,7 +299,7 @@ user=> (ns-publics 'clojure.string) ; let's check what clojure.string defines
 #'clojure.string/replace, split-lines #'clojure.string/split-lines, lower-case #'clojure.string/lower-case, trim-newline #'clojure.string/trim-newline, upper-case #'clojure.string/upper-case, split #'clojure.string/split, trimr #'clojure.string/trimr, index-of #'clojure.string/index-of, trim #'clojure.string/trim, triml #'clojure.string/triml, blank? #'clojure.string/blank?}
 
 ;clojure.string/split looks cool but how do we use it?
-user=> (doc clojure.string/split) ; thankfully the repl has a doc function that'll help
+user=> (doc clojure.string/split) ; thankfully the REPL has a doc function that'll help
 clojure.string/split
 ([s re] [s re limit])
   Splits string on a regular expression.  Optional argument limit is
@@ -469,7 +469,7 @@ OpenJDK 64-Bit Server VM 11.0.1+13
     Exit: Control+D or (exit) or (quit)
  Results: Stored in vars *1, *2, *3, an exception in *e
 
-;; you'll see there's a lot more output when starting this repl
+;; you'll see there's a lot more output when starting this REPL
 ;; by default lein loads nREPL - a much more feature-packed REPL
 ;; but for now we don't need to know much about this
 
@@ -483,7 +483,7 @@ nil ; we do!
  
 ```
 
-Without exiting the repl let's make some changes to `main.clj`:
+Without exiting the REPL let's make some changes to `main.clj`:
 ```clojure
 (ns main)
 
@@ -493,12 +493,12 @@ Without exiting the repl let's make some changes to `main.clj`:
 (def url "http://dev.to")
 ```
 
-Back to the repl:
+Back to the REPL:
 ```clojure
 user=> (require '[main :reload :all]) 
 nil
 
-user=> (ns main) ; let's set our repl to main
+user=> (ns main) ; let's set our REPL to main
 nil
 
 main=> url
