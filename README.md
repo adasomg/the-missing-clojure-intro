@@ -21,19 +21,19 @@ Ok, let's get started!
 
 # What is Clojure
 [Clojure's homepage](https://clojure.org/index) has this to say:
-```text
-Clojure is a dynamic, general-purpose programming language, combining the approachability and interactive development of a scripting language with an efficient and robust infrastructure for multithreaded programming. Clojure is a compiled language, yet remains completely dynamic – every feature supported by Clojure is supported at runtime. Clojure provides easy access to the Java frameworks, with optional type hints and type inference, to ensure that calls to Java can avoid reflection.
 
+> Clojure is a dynamic, general-purpose programming language, combining the approachability and interactive     development of a scripting language with an efficient and robust infrastructure for multithreaded programming. Clojure is a compiled language, yet remains completely dynamic – every feature supported by Clojure is supported at runtime. Clojure provides easy access to the Java frameworks, with optional type hints and type inference, to ensure that calls to Java can avoid reflection.
+<br/><br/>
 Clojure is a dialect of Lisp, and shares with Lisp the code-as-data philosophy and a powerful macro system. Clojure is predominantly a functional programming language, and features a rich set of immutable, persistent data structures. When mutable state is needed, Clojure offers a software transactional memory system and reactive Agent system that ensure clean, correct, multithreaded designs.
-
+<br/><br/>
 I hope you find Clojure's combination of facilities elegant, powerful, practical and fun to use.
-
-Rich Hickey 
+<br/><br/>
+Rich Hickey <br/>
 author of Clojure and CTO Cognitect
-```
-But what is it really?
-On the most fundamental level Clojure is just a java program. 
-Before we even begin we should get `java`.
+
+But what is it really?  
+On the most fundamental level Clojure is just a java program.  
+Before we even begin we should get `java`.  
 
 # Java & Getting java
 
@@ -763,22 +763,26 @@ Now you can continue learning with confidence.
 Look at <sup id="a5">[footnote 5](#f5)</sup> if you want to make this installation permanent.  
 Checkout the links for __where to go next__.   
 
+# Thank me
+If you enjoyed this __let me know by 💬commenting💬, ❤liking❤ or ⭐starring⭐ on [github](https://github.com/adasomg/the-missing-clojure-intro)__.  
+Otherwise I won't know and you'll never see a similar guide from me again 😭
+
 # Links & footnotes
 
 ## links
+- [Clojurians slack - if you have a problem they'll probably help you out if you ask](https://clojurians.slack.com/)
 - [Clojure cheatsheet - always have this open, the function you're looking for is probably on this list](https://clojure.org/api/cheatsheet)
 - [Sample project.clj file showing the many thing lein can do](https://github.com/technomancy/leiningen/blob/master/sample.project.clj)
 - [lein's FAQ](https://github.com/technomancy/leiningen/blob/stable/doc/FAQ.md)
-- [Clojurians slack - if you have a problem they'll probably help you out if you ask](https://clojurians.slack.com/)
-- [ClojureDocs](https://clojuredocs.org)
+- [ClojureDocs.org](https://clojuredocs.org)
 - [Docs on the java classpath](https://docs.oracle.com/javase/8/docs/technotes/tools/windows/classpath.html)
 - [Comprehensive docs on the many commands that ship with the JDK](https://docs.oracle.com/javase/9/tools/tools-and-command-reference.htm#JSWOR596)
 - [Official Clojure getting started docs](https://clojure.org/guides/getting_started)
 - [What is Maven?](https://maven.apache.org/what-is-maven.html)
-- [Clojars](https://clojars.org/)
+- [Clojars repository](https://clojars.org/)
 - [Clava - clj extension for VS code ](https://marketplace.visualstudio.com/items?itemName=cospaia.clojure4vscode)
 - [Cursive - a dedicated Clojure IDE, probably the best OTOB experience](https://cursive-ide.com/)
-- [Cider - emacs Clojure IDE](https://docs.cider.mx/en/latest/)
+- [Cider - Emacs Clojure IDE](https://docs.cider.mx/en/latest/)
 - [Enlive quickstart](https://github.com/cgrand/enlive#quickstart-tutorial)
 ## footnotes
 <b id="f1">1</b> Yes, these PowerShell commands are weird. But they enables this guide to work even on the most basic Windows machine. No extra software needed. [↩](#a1)  
@@ -792,7 +796,7 @@ Checkout the links for __where to go next__.
 But unlike _npm_, the _Maven_ world relies less on a single repository. 
 In fact most Clojure libraries are hosted on [clojars](https://clojars.org/) rather than Maven Central.
 Even cooler than that when you use Maven your own computer also works essentially like a repository.
-If you're developing locally you can install articatcs into your local repo and it all works. 
+If you're developing locally you can install artifacts into your local repo and it all works. 
 `lein install` will do exactly that.[↩](#a4)
 
 <b id="f5">5</b>
@@ -801,7 +805,7 @@ If you don't know how to do that on Windows press Win+R, type `rundll32 sysdm.cp
 
 Example:
 ```powershell
-# you need to open this powershell promp as an Administrator
+# you need to open this powershell prompt as an Administrator
 PS C:\Windows\system32> cd ~
 
 PS C:\Users\adas> cd clojure
