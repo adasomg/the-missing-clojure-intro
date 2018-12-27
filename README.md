@@ -16,7 +16,7 @@ Follow along carefully, don't skip any parts, __faithfully execute every command
 Copy-and-paste PowerShell commands<sup id="a1">[1](#f1)</sup>, but when evaluating Clojure __please retype yourself!__  
 In __only 5 to 10 minutes__ you'll be spared __weeks of frustration__.
 
-Open up a PowerShell (press Win, type `powershell` and press Enter). Please, __don't close it till the end__.
+Open up a PowerShell (press Win, type `powershell` and press Enter). Please, __don't close it till the end__.  
 Ok, let's get started!
 
 # What is Clojure
@@ -766,7 +766,8 @@ Look at <sup id="a5">[footnote 5](#f5)</sup> if you want to make this installati
 Checkout the links for __where to go next__.   
 
 # Thank me
-If you enjoyed this __let me know by 💬commenting💬, ❤liking❤ or ⭐starring⭐ on [github](https://github.com/adasomg/the-missing-clojure-intro)__.  
+__If you enjoyed this let me know__ by 💬commenting💬, ❤liking❤, ⭐starring⭐ on [github](https://github.com/adasomg/the-missing-clojure-intro),  
+or by 👣[following the author on twitter](https://twitter.com/adasomg)👣.  
 Otherwise I won't know and you'll never see a similar guide from me again 😭
 
 # Links & footnotes
