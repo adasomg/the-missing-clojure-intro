@@ -82,11 +82,11 @@ openjdk version "11.0.1" 318-1-16 # it did
 ```
 Great, `java` is ready.
 
-# Getting clojure
-Now we can finally get ourselves _clojure_. Like most Java programs it ships as a JAR.  
+# Getting Clojure
+Now we can finally get ourselves Clojure. Like most Java programs it ships as a JAR.  
 JARs are basically ZIP files.  
 Most code and code-like stuff in the Java world is distributed as JARs.  
-So let's get a JAR for clojure.
+So let's get a JAR for Clojure.
 
  ```powershell
  PS C:\Users\adas\clojure> wget http://repo1.maven.org/maven2/org/clojure/clojure/1.8.0/clojure-1.8.0.jar -OutFile clojure.jar
@@ -384,8 +384,8 @@ A web scraping library would come in handy. After a bit of googling [enlive](htt
 But how do we get it? Onto the next part...
 
 # lein
-Does Clojure have an `npm` equivalent? Kind of.
- `lein` is a lot like `npm`, but again - to understand we have to go back to the java world.  
+Does Clojure have an `npm` equivalent (or `pip` or `gem`)? Kind of.  
+ [lein](https://leiningen.org/) is a lot like `npm`, but again - to understand we have to go back to the java world.  
 
 Java already has an arguably more powerful build and dependency management tool - __Maven__<sup id="a2">[2](#f2)</sup>.  
 Like `npm`, __Maven__ can ingest our dependency specs and download relevant __artifacts__ - usually JAR files containing code.  
