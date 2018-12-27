@@ -469,8 +469,8 @@ OpenJDK 64-Bit Server VM 11.0.1+13
     Exit: Control+D or (exit) or (quit)
  Results: Stored in vars *1, *2, *3, an exception in *e
 
-;; you'll there's a lot more output when starting this repl
-;; by default lein loads nREPL - a much more feature packed REPL
+;; you'll see there's a lot more output when starting this repl
+;; by default lein loads nREPL - a much more feature-packed REPL
 ;; but for now we don't need to know much about this
 
 user=> (require 'main) ;; still works
