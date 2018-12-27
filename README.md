@@ -14,7 +14,7 @@ We'll get java, talk about java stuff (JARs, the classpath, Maven), play around 
 
 Follow along carefully, don't skip any parts, __faithfully execute every command as I do__!  
 Copy-and-paste PowerShell commands<sup id="a1">[1](#f1)</sup>, but when evaluating Clojure __please retype yourself!__  
-In __only 5 to 10 minutes__ you'll be spared __weeks of frustration__.
+In __only 10 minutes__ you'll be spared __weeks of frustration__.
 
 Open up a PowerShell (press Win, type `powershell` and press Enter). Please, __don't close it till the end__.  
 Ok, let's get started!
