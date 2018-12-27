@@ -254,7 +254,7 @@ user=> (s/split "A string we want to split into words" #" ")
 ["A" "string" "we" "want" "to" "split" "into" "words"]
 user=> (resolve 's/split) ;but it will still resolve to the full name
 #'clojure.string/split
-user=> (require '[clojure.string :as s :refer [split]])
+user=> (require '[clojure.string :as s :refer [split]]) ; require split directly into our namespace
 nil
 user=> (resolve 'split) ; still nicely resolves to the real deal
 #'clojure.string/split
@@ -295,7 +295,9 @@ Back to the REPL:
 ```clojure
 user=> (require 'main) ; hmmm where's our println?
 nil
-user=> (require '[main :reload :all]) ; we have to :reload :all if we want to reeval our file
+user=> (require 'main) ; a namespace is loaded only once, requiring twice does nothing
+nil
+user=> (require '[main :reload :all]) ; but we can :reload :all to trigger a re-evaluation
 hello world ; nice!
 nil
 ```
@@ -306,9 +308,10 @@ But how do we get it? Onto the next part...
 
 # lein
 Does clojure have an `npm` equivalent? Kind of.
- `lein` is a lot like `npm`, but again - to understand we have to go back to the java world.
-Java already has an arguably more powerful build and dependency management tool - __Maven__<sup id="a2">[2](#f2)</sup>. 
-Like `npm`, __Maven__ can ingest our dependency specs and download relevant __artifacts__ - usually JAR files containing code. 
+ `lein` is a lot like `npm`, but again - to understand we have to go back to the java world.  
+
+Java already has an arguably more powerful build and dependency management tool - __Maven__<sup id="a2">[2](#f2)</sup>.  
+Like `npm`, __Maven__ can ingest our dependency specs and download relevant __artifacts__ - usually JAR files containing code.  
 But just like the `java` command, __Maven's__ cli interface - `mvn` isn't easy.  
 That's where `lein` comes in<sup id="a3">[3](#f3)</sup>. 
 It will fetch dependencies with __Maven__, generate a classpath and run `java`, so we don't have to manually craft a very complex `java` command by hand. And much, much more!
@@ -350,9 +353,7 @@ If we go to [Maven Central's search page](https://search.maven.org/)<sup id="a4"
   <version>1.1.0</version>
 </dependency>
 ```
-
-`:dependencies` is a vector of vectors that defines our project's dependencies. 
-Our one dependency is `[org.clojure/clojure "1.9.0"]`, now when we tell `lein` to run our project it will use maven to download that jar for us and put it on the java classpath. Cool!
+This is what lein will understand the dependency vector `[org.clojure/clojure "1.9.0"]` to mean.
 
 [Enlive's](https://github.com/cgrand/enlive#artifact) github README [already gives us the lein-style dependency vector](https://github.com/cgrand/enlive#artifact): `[enlive "1.1.6"]`. Great!
 So if we add clojure and enlive our project.clj should end up looking like this:
@@ -361,8 +362,9 @@ So if we add clojure and enlive our project.clj should end up looking like this:
   :dependencies [[org.clojure/clojure "1.9.0"]
                  [enlive "1.1.6"]])
 ```
+ Now when we tell `lein` to run our project it will use maven to download that jar from Maven Central<sup id="a4">[4](#f4)</sup> and put it on the java classpath. Nice.
 
-By default lein adds the `src` directory to the java classpath and it's considered the standard practice, so:
+By default lein adds the `src` directory to the java classpath and it's considered a standard practice, so:
 ```powershell
 PS C:\Users\adas\clojure> mkdir src # make diresctory src
 PS C:\Users\adas\clojure> mv main.clj src/ # move our main.clj to src/, remember to close main.clj in your editor
@@ -371,7 +373,7 @@ PS C:\Users\adas\clojure> src/main.clj # should open main.clj at it's new locati
 
 Ok let's start the REPL with lein now:
 ```clojure
-PS C:\Users\adas\clojure> lein repl 
+PS C:\Users\adas\clojure> lein repl # like I promised, lein is downloading dependencies first
 Retrieving org/clojure/clojure/1.9.0/clojure-1.9.0.pom from central
 ...
 nREPL server started on port 56786 on host 127.0.0.1 - nrepl://127.0.0.1:56786
@@ -387,9 +389,10 @@ OpenJDK 64-Bit Server VM 11.0.1+13
  Results: Stored in vars *1, *2, *3, an exception in *e
 
 user=> (require 'main) ;; still works
+hello world
 nil
-user=> (require '[net.cgrand.enlive-html :as html]) ;; as per https://github.com/cgrand/enlive#quickstart-tutorial
-nil ; nice we've got enlive now
+user=> (require '[net.cgrand.enlive-html :as html]) ;; confirm that we have enlive on our classpath as per https://github.com/cgrand/enlive#quickstart-tutorial
+nil ; we do!
  
 ```
 
@@ -405,7 +408,7 @@ Without exiting the repl let's make some changes to `main.clj`:
 
 Back to the repl:
 ```clojure
-user=> (require 'main) 
+user=> (require '[main :reload :all]) 
 nil
 user=> (ns main) ; let's set our repl to main
 nil
@@ -417,7 +420,7 @@ main=> (def document (enlive/html-resource (java.net.URL. url))) ;; this will fe
 #'main/document
 main=> (def headers (enlive/select document [:.single-article :h3])) ;;how this works is beyond the scope of this guide, but it's basically like running document.querySelectorAll(".single-article > h3")
 main=> (first headers)
-{:tag :h3, :attrs nil, :content ("\n Freelancing 11: How to get started \n            ")}
+{:tag :h3, :attrs nil, :content ("...")}
 main=> (first (:content (first headers)))
 "\n              Freelancing 11: How to get started\n            "
 main=> (def sample-headline (first (:content (first headers))))
@@ -451,43 +454,19 @@ main=> (pprint (frequencies (flatten (map (comp tokenize first :content) headers
  "Why" 1,
 ...}
 main=> ;; this is getting a little unwieldy, using a ->> "thread last macro" we can rewrite it as:
-main=> (->> headers (map (comp tokenize enlive/text)) flatten frequencies pprint)
+main=> (->> headers (map (comp tokenize first :content)) flatten frequencies pprint)
 {"Interviews" 1,
  "Why" 1,
-...} ;; what's going on???
-main=> (macroexpand '(->> headers (map (comp tokenize enlive/text)) flatten frequencies pprint)) 
-(pprint (frequencies (flatten (map (comp tokenize enlive/text) headers)))) ;; exactly like before!
-main=> (macroexpand '(->> 1 *) 
-(* 1) ;; ok so 1 gets applied to * (multiplication)
-main=> (macroexpand '(->> 1 (* 3)))
-(* 3 1)  ;; 1 sort of gets inserted as the second argument to *
-main=> (macroexpand '(->> 1 (* 3 7)))
-(* 3 7 1) ;; no, it gets inserted as the last argument, hence "thread-last"
-main=> (macroexpand '(->> 1 (* 3) -))
-(- (* 3 1)) ;; now 1 is applied to * but then that resulting expression is applied to - (minus), hence "thread", we continually "thread" expressions into the last position 
-main=> (macroexpand '(->> 1 (* 3) (- 7)))
-(- 7 (* 3 1))
-main=> (macroexpand '(->> 1 (* 3) (- 7)))
-(- 7 (* 3 1))
-main=> (eval (macroexpand '(->> 1 (* 3) (- 7))))
-4
-main=> (->> 1 (* 3) (- 7))
-4 ;now we begin to understand what macros really do, they simply transform code before it runs
-main=> (macroexpand '(-> 1 (* 3) (- 7)))
-(- (* 1 3) 7)
-main=> (macroexpand '(-> 1 *))
-(* 1)
-main=> (macroexpand '(-> 1 (* 3)))
-(* 1 3)
-main=> (macroexpand '(-> 1 (* 3) -))
-(- (* 1 3))
-main=> (macroexpand '(-> 1 (* 3) (- 7)))
-(- (* 1 3) 7)
-main=> (-> 1 (* 3) (- 7))
--4
-main=> ;; ok back to work
-main=> (->> headers (map (comp tokenize enlive/text)) flatten frequencies pprint) ;so we know how this works now
-main=> (->> headers (map (comp tokenize enlive/text)) flatten frequencies (sort-by val) pprint)
+...} ;; works, but what's going on???
+;; ->> is a macro, for complete docs see (https://clojuredocs.org/clojure.core/-%3E%3E)
+;; we can can examine what a macro expands to by doing macroexpand:
+main=> (macroexpand '(->> headers (map (comp tokenize first :content)) flatten frequencies pprint)) 
+(pprint (frequencies (flatten (map (comp tokenize first :content) headers)))) ;; exactly like before!
+;; note how we had to quote the argument to macroexpand with '
+;; quoting stops any evaluation from happening, so we can treat this piece of code as data
+
+main=> (->> headers (map (comp tokenize first :content)) flatten frequencies pprint) ;so we know how this works now
+main=> (->> headers (map (comp tokenize first :content)) flatten frequencies (sort-by val) pprint)
 (...
  ["Gift" 2]
  ["in" 2]
@@ -525,7 +504,7 @@ Let's clean up our `main.clj` now that we're almost done:
 
 (def top-words
   (->> headers
-       (map (comp tokenize enlive/text))
+       (map (comp tokenize first :content))
        flatten
        frequencies
        (sort-by val)))
