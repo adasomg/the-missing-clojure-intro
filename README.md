@@ -3,7 +3,7 @@ Clojure promises __unprecedented productivity__.
 It's true! But before you ever get to that point you'll face __unprecedented confusion__.  
 Understanding Clojure's tooling __is VERY challenging__.  
 
-Most guides push you straight into writing Clojure and don't bother explaining the __NASTY foundations__.
+Most guides push you straight into writing Clojure and don't bother explaining the __complex foundations__.
 
 This is different.  
 I will __NEVER__ tell you to go do something yourself.
