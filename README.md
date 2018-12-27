@@ -411,7 +411,7 @@ PS C:\Users\adas\clojure> lein # make sure it's available now
 # we create "project.clj" - it's a lot like npm's "package.json"
 PS C:\Users\adas\clojure> echo "" > project.clj 
 
-PS C:\Users\adas\clojure> project.clj # should open project.clj in your default editor
+PS C:\Users\adas\clojure> ./project.clj # should open project.clj in your default editor
 
 ```
 
