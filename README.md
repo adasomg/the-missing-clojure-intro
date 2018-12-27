@@ -123,7 +123,7 @@ So let's get a JAR for clojure.
  PS C:\Users\adas\clojure> java -cp clojure.jar clojure.main
  Clojure 1.8.0
  user=> "Nice, clojure.main starts a clojure repl!"
-"This is a clojure repl!"
+"Nice, clojure.main starts a clojure repl!"
  user=> "Let's Ctrl-C out of here"
 
 PS C:\Users\adas\clojure> cat jar-disassembly/META-INF/MANIFEST.MF # A JAR's META-INF/MANIFEST.MF specifices a default Main-Class, here clojure.main
@@ -170,7 +170,7 @@ user=> :key ;; but a key, unlike javascript, isn't just notational sugar, a key,
 :key
 user=> (type :key)
 clojure.lang.Keyword
-user=> {1 "val"} ;; clojure maps take any basic clojure types as keys, they don't have to be keywords
+user=> {1 "val"} ;; clojure maps take any basic clojure values as keys, they don't have to be keywords
 {1 "val"}
 user=> {[1 2] "val"} ;; even vectors work
 {[1 2] "val"}
@@ -218,41 +218,49 @@ nil
 user=> ;; namespaces are a very important concept in clojure, everything exists in a namespace
 user=> *ns* ;; special symbol *ns* contains the current namespace
 #object[clojure.lang.Namespace 0xf8908f6 "user"]
-user=> ;; this is why we're seeing this "user" thing in our repl, it indicated the current namespace
+
+user=> ;; this is why we're seeing this "user" thing in our repl indicating the current namespace
 user=> (ns other) ;; we jump to a differnt ns
 nil
 other=> m ;; m is undefined here
 CompilerException java.lang.RuntimeException: Unable to resolve symbol: m in this context, compiling:(NO_SOURCE_PATH:0:0)
+
 other=> user/m ;; we could still access the old m by namespace-qualifying our symbol
 {:key "value", :another-key "almost like js right?"}
 other=> (ns user) ;;ok back to user
-user=> ; libraries in clojure will come in their own namespaces, clojure ships with some builtin utility namespaces
-user=> (require 'clojure.string) ;; like clojure.string
+user=> ; libraries in clojure will come in their own namespaces, clojure ships with some built-in ones
+user=> (require 'clojure.string) ;; unloaded namespaces have to be required first, like clojure.string
 nil
+
 user=> (ns-publics 'clojure.string) ; let's check what clojure.string defines
 {ends-with? #'clojure.string/ends-with?, capitalize #'clojure.string/capitalize, reverse #'clojure.string/reverse, join #'clojure.string/join, replace-first #'clojure.string/replace-first, starts-with? #'clojure.string/starts-with?, escape #'clojure.string/escape, last-index-of #'clojure.string/last-index-of, re-quote-replacement #'clojure.string/re-quote-replacement, includes? #'clojure.string/includes?, replace
 #'clojure.string/replace, split-lines #'clojure.string/split-lines, lower-case #'clojure.string/lower-case, trim-newline #'clojure.string/trim-newline, upper-case #'clojure.string/upper-case, split #'clojure.string/split, trimr #'clojure.string/trimr, index-of #'clojure.string/index-of, trim #'clojure.string/trim, triml #'clojure.string/triml, blank? #'clojure.string/blank?}
+
 user=> ; clojure.string/split looks cool but how do we use it?
 user=> (doc clojure.string/split) ; thankfully the repl has a doc function that'll help
--------------------------
 clojure.string/split
 ([s re] [s re limit])
   Splits string on a regular expression.  Optional argument limit is
   the maximum number of splits. Not lazy. Returns vector of the splits.
-user=> (clojure.string/split "A string we want to split into words" #" ") ;  #"regex" <= this is a regex literal (think /regex/ in js)
+
+user=> (clojure.string/split "A string we want to split into words" #" ") 
+;;  #"regex" <= this is a regex literal (think /regex/ in js)
 ["A" "string" "we" "want" "to" "split" "into" "words"]
+
 user=> (require '[clojure.string :as s]) ; to save ourselves typing we can require a namespace under a shortened name
 nil
-user=> (s/split "A string we want to split into words" #" ") ; note this #" is a literal for a regex"
+
+user=> (s/split "A string we want to split into words" #" ")
 ["A" "string" "we" "want" "to" "split" "into" "words"]
 user=> (resolve 's/split) ;but it will still resolve to the full name
 #'clojure.string/split
-user=> (require '[clojure.string :as s :refer [split]]) ; with :refer [split] it's just as if split was in our current namespace
+user=> (require '[clojure.string :as s :refer [split]])
 nil
 user=> (resolve 'split) ; still nicely resolves to the real deal
 #'clojure.string/split
 user=> (require 'main) ; what if we require a non-existent namespace?
 FileNotFoundException Could not locate main__init.class or main.clj on classpath.  clojure.lang.RT.load (RT.java:456)
+
 user=> ;; interesting so java was looking for main.class or main.clj on the classpath
 user=> ;; so what if there actually was main.clj on the class path?
 user=> ;; let's add it, unfortunately this means we have to Ctrl-C out of here
@@ -267,8 +275,9 @@ In `main.clj`:
 ```
 
 In PowerShell:
-```clojure
-PS C:\Users\adas\clojure> java -cp "clojure.jar;." clojure.main #; now we also add current directory (".") to the classpath so java can find main.clj
+```powershell
+PS C:\Users\adas\clojure> #now we'll also add current directory (".") to the classpath so java can find main.clj
+PS C:\Users\adas\clojure> java -cp "clojure.jar;." clojure.main
 user=> (require 'main)
 nil
 user=> main/nine
