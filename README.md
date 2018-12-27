@@ -439,11 +439,12 @@ This is what lein will understand the dependency vector `[org.clojure/clojure "1
 [Enlive's](https://github.com/cgrand/enlive#artifact) github README [already gives us a lein-style dependency vector](https://github.com/cgrand/enlive#artifact): `[enlive "1.1.6"]`. Great!  
 So if we add Clojure and enlive our project.clj should end up looking like this:
 ```clojure
+;; C:\Users\adas\clojure\project.clj
 (defproject devto "0.0.1"
   :dependencies [[org.clojure/clojure "1.9.0"]
                  [enlive "1.1.6"]])
 ```
-By default lein adds the `src` directory to the java classpath and it's considered a standard practice, so:
+By default `lein` adds the `src` directory to the java classpath and it's considered a standard practice, so:
 ```powershell
 PS C:\Users\adas\clojure> mkdir src # make diresctory src
 
@@ -513,6 +514,7 @@ main=> (def document (enlive/html-resource (java.net.URL. url)))
 
 ;; how this works is beyond the scope of this guide
 ;; but it's basically like running document.querySelectorAll(".single-article > h3")
+;; it should get us all the right headline elements from dev.to
 main=> (def headers (enlive/select document [:.single-article :h3])) 
 
 main=> (first headers)
@@ -531,20 +533,20 @@ main=> (s/split sample-headline #"[\n :]+")
 ["" "Freelancing" "11" "How" "to" "get" "started"]
 ;; uh we don' want that ""
 ;; but we're also not smart enough to make a better regexp
-;; let's hack something togather
+;; let's figure out a hack...
 
-;; an identity returns it's input, it basically does nothing
+;; an identity fn returns it's input, basically does nothing
 main=> (identity 3)
 3
 
 ;; filter applies a function to every element in a collection
-;; and removes any elements that return falsy values
+;; and removes any elements that return falsy values (think Array.filter in JavaScript)
 main=> (filter identity [1 2 3 nil false ""])
-(1 2 3 "")
+(1 2 3 "") ;; note that both nil and false are "falsy" values in Clojure
 
-main=> (not-empty "string")
+main=> (not-empty "string") ;; not-empty  returns it's input if it's not empty
 "string"
-main=> (not-empty "")
+main=> (not-empty "") ;; but returns nil if it is
 nil
 
 main=> (filter not-empty (s/split sample-headline #"[\n :]+"))
@@ -552,8 +554,8 @@ main=> (filter not-empty (s/split sample-headline #"[\n :]+"))
 ;;if you're confused a javascript equivalent for above would be:
 ;; " Freelancing 11: How to get started".split(/[\n ]+/).filter(x=>x)   empty strings are falsy in js so no need for not-empty
 
-;; instead of applying content and then applying first
-;; we can compose these two functions into one with comp:
+;; instead of doing (first (:content (first headers)))
+;; we can compose the two functions into one with comp:
 main=> ((comp first :content) (first headers))
 "\n              Freelancing 11: How to get started\n            "
 
