@@ -14,10 +14,10 @@ We'll get java, talk about java stuff (JARs, the classpath, Maven), play around 
 
 Follow along carefully, don't skip any parts, __faithfully execute every command as I do__!  
 Copy-and-paste PowerShell commands<sup id="a1">[1](#f1)</sup>, but when evaluating Clojure __please retype yourself!__  
-This will take __ONLY 5 to 10 minutes__.
+In __only 5 to 10 minutes__ you'll be spared __weeks of frustration__.
 
-Open up a PowerShell (press Win, type `powershell` and press Enter). And please __don't close it till the end__.  
-Ok, let's get started...
+Open up a PowerShell (press Win, type `powershell` and press Enter). Please, __don't close it till the end__.
+Ok, let's get started!
 
 # What is Clojure
 [Clojure's homepage](https://clojure.org/index) has this to say:
@@ -83,9 +83,9 @@ openjdk version "11.0.1" 318-1-16 # it did
 Great, `java` is ready.
 
 # Getting clojure
-Now we can finally get ourselves _clojure_. Like most java programs it ships as a JAR. 
-JARs are basically ZIP files (with conventions).
-Most code and code-like stuff in the Java world is distributed as JARs.
+Now we can finally get ourselves _clojure_. Like most java programs it ships as a JAR.  
+JARs are basically ZIP files.  
+Most code and code-like stuff in the Java world is distributed as JARs.  
 So let's get a JAR for clojure.
 
  ```powershell
@@ -421,12 +421,12 @@ In `project.clj`:
 (defproject devto-words "0.0.1"
   :dependencies [])
 ```
-This defines a project `devto-words` version 0.0.1 with no dependencies.
-First we'd like to pull in Clojure itself, right?
+This defines a project `devto-words` version `0.0.1` with no dependencies.  
+First we'd like to pull in Clojure itself, right?  
 We need to add `[org.clojure/clojure "1.1.0"]` to our dependencies. "clojure" and  "1.9.0" makes sense, but why the `org.clojure` namespace?   
 When lein interprets our dependencies it will use the namespace `org.clojure` as a Maven `groupId`, name `clojure` as `artifactId` and `"1.1.0"` will become `version`.
 
-If we go to [Maven Central's search page](https://search.maven.org/)<sup id="a4">[4](#f4)</sup> and [look for "clojure"](https://search.maven.org/) you can confirm that there is indeed such an artifact, a full xml spec is given:
+If we go to [Maven Central's search page](https://search.maven.org/)<sup id="a4">[4](#f4)</sup> and [look for "clojure"](https://search.maven.org/artifact/org.clojure/clojure/1.10.0/jar) you can confirm that there is indeed such an artifact, a full xml spec is given:
 ```xml
 <dependency>
   <groupId>org.clojure</groupId>
@@ -436,15 +436,13 @@ If we go to [Maven Central's search page](https://search.maven.org/)<sup id="a4"
 ```
 This is what lein will understand the dependency vector `[org.clojure/clojure "1.9.0"]` to mean.
 
-[Enlive's](https://github.com/cgrand/enlive#artifact) github README [already gives us a lein-style dependency vector](https://github.com/cgrand/enlive#artifact): `[enlive "1.1.6"]`. Great!
+[Enlive's](https://github.com/cgrand/enlive#artifact) github README [already gives us a lein-style dependency vector](https://github.com/cgrand/enlive#artifact): `[enlive "1.1.6"]`. Great!  
 So if we add Clojure and enlive our project.clj should end up looking like this:
 ```clojure
 (defproject devto "0.0.1"
   :dependencies [[org.clojure/clojure "1.9.0"]
                  [enlive "1.1.6"]])
 ```
- Now when we tell `lein` to run our project it will use maven to download that jar from Maven Central<sup id="a4">[4](#f4)</sup> and put it on the java classpath. Nice.
-
 By default lein adds the `src` directory to the java classpath and it's considered a standard practice, so:
 ```powershell
 PS C:\Users\adas\clojure> mkdir src # make diresctory src
@@ -454,7 +452,7 @@ PS C:\Users\adas\clojure> mv main.clj src/ # move our main.clj to src/, remember
 PS C:\Users\adas\clojure> src/main.clj # should open main.clj at it's new location
 ```
 
-Ok let's start the REPL with lein now:
+Now when we start the REPL with `lein` it will first download our dependencies from Maven Central et al.<sup id="a4">[4](#f4)</sup>, put them on java's classpath, and finally start the REPL:
 ```clojure
 PS C:\Users\adas\clojure> lein repl # like I promised, lein is downloading dependencies first
 Retrieving org/clojure/clojure/1.9.0/clojure-1.9.0.pom from central
@@ -758,10 +756,12 @@ Wrote C:\Users\adas\clojure\pom.xml
 Installed jar and pom into local repo.
 ```
 # Thank you
-That's it for now!  
-There's a lot of Clojure for you to learn. 
-But hopefully thanks to what you just learned __it will be much less frustrating__.  
-Checkout the links for __where to go next__.  
+We didn't learn much Clojure.  
+But we learned many little details that most won't guides won't teach you.  
+Now you can continue learning with confidence.  
+
+Look at <sup id="a5">[footnote 5](#f5)</sup> if you want to make this installation permanent.  
+Checkout the links for __where to go next__.   
 
 # Links & footnotes
 
@@ -773,7 +773,7 @@ Checkout the links for __where to go next__.
 - [ClojureDocs](https://clojuredocs.org)
 - [Docs on the java classpath](https://docs.oracle.com/javase/8/docs/technotes/tools/windows/classpath.html)
 - [Comprehensive docs on the many commands that ship with the JDK](https://docs.oracle.com/javase/9/tools/tools-and-command-reference.htm#JSWOR596)
-- [Official getting started docs](https://clojure.org/guides/getting_started)
+- [Official Clojure getting started docs](https://clojure.org/guides/getting_started)
 - [What is Maven?](https://maven.apache.org/what-is-maven.html)
 - [Clojars](https://clojars.org/)
 - [Clava - clj extension for VS code ](https://marketplace.visualstudio.com/items?itemName=cospaia.clojure4vscode)
@@ -795,8 +795,39 @@ Even cooler than that when you use Maven your own computer also works essentiall
 If you're developing locally you can install articatcs into your local repo and it all works. 
 `lein install` will do exactly that.[↩](#a4)
 
+<b id="f5">5</b>
 If you want to make our java and lein installation permanent, move `java11` to a better location like `C:\java11` and `lein.bat` to somewhere like `C:\lein\lein.bat` and add `C:\java11\bin` and `C:\lein` to your PATH.  
 If you don't know how to do that on Windows press Win+R, type `rundll32 sysdm.cpl,EditEnvironmentVariables` and press Enter. Then under `System Variables` you can select Path and press Edit.
+
+Example:
+```powershell
+# you need to open this powershell promp as an Administrator
+PS C:\Windows\system32> cd ~
+
+PS C:\Users\adas> cd clojure
+
+PS C:\Users\adas\clojure>
+
+PS C:\Users\adas\clojure> mv java11 C:\java11
+
+PS C:\Users\adas\clojure> mkdir C:\lein
+
+PS C:\Users\adas\clojure> mv lein.bat C:\lein\
+
+# should open the right windows menu for you
+# Select Path under System Variables, click Edit and add C:\java11\bin and C:\lein
+PS C:\Users\adas\clojure> rundll32 sysdm.cpl,EditEnvironmentVariables 
+
+#restart powershell to reload PATH....
+# make sure java and lein works
+PS C:\Users\adas> java
+
+PS C:\Users\adas> lein
+
+PS C:\Users\adas> rm clojure #don't need this anymore
+# done
+```
+[↩](#a5)
 
 ## very misc links
 - [A tutorial on the PowerShell ZipFile stuff](https://blogs.technet.microsoft.com/heyscriptingguy/2015/08/14/working-with-compressed-files-in-powershell-5/)
