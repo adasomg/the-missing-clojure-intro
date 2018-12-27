@@ -405,7 +405,7 @@ PS C:\Users\adas\clojure> ./lein.bat # should work now
 ...
 PS C:\Users\adas\clojure> $env:path+=";" + $PWD # temporarily add it to our path so it's available everywhere
 
-PS C:\Users\adas\clojure> lein # make sure it's availale now
+PS C:\Users\adas\clojure> lein # make sure it's available now
 ... 
 
 # we create "project.clj" - it's a lot like npm's "package.json"
