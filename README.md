@@ -13,7 +13,7 @@ __ZERO foreknowledge required!__ Nothing will be installed permanently!
 We'll get java, talk about java stuff (JARs, the classpath, Maven), play around in Clojure's REPL, install lein, explain what lein really does, and make a simple Clojure program that counts most frequent words in [dev.to](https://dev.to) headlines.
 
 Follow along carefully, don't skip any parts, __faithfully execute every command as I do__!  
-Copy-and-paste PowerShell commands<sup id="a1">[1](#f1)</sup>, but when evaluating Clojure __please retype yourself!__
+Copy-and-paste PowerShell commands<sup id="a1">[1](#f1)</sup>, but when evaluating Clojure __please retype yourself!__  
 This will take __ONLY 5 to 10 minutes__.
 
 Open up a PowerShell (press Win, type `powershell` and press Enter). And please __don't close it till the end__.  
@@ -49,6 +49,7 @@ PS C:\Users\adas> mkdir clojure
 
 PS C:\Users\adas> cd clojure
 
+#187MB download
 PS C:\Users\adas\clojure> wget https://download.java.net/java/GA/jdk11/13/GPL/openjdk-11.0.1_windows-x64_bin.zip -OutFile java11.zip
 # might take a minute or two to download. OpenJDK is almost exactly like Oracle's JDK, 
 # for our purposes there's no real difference.
@@ -90,10 +91,8 @@ So let's get a JAR for clojure.
  ```powershell
  PS C:\Users\adas\clojure> wget http://repo1.maven.org/maven2/org/clojure/clojure/1.8.0/clojure-1.8.0.jar -OutFile clojure.jar
 
- PS C:\Users\adas\clojure> # let's take a quick peak inside the jar
-
- PS C:\Users\adas\clojure> # (notice how we use a function for extracting Zip Files, because JARs are just Zips)
-
+# let's take a quick peak inside the jar
+# (notice how we use a function for extracting Zip Files, because JARs are just Zips)
  PS C:\Users\adas\clojure> [System.IO.Compression.ZipFile]::ExtractToDirectory((Join-Path $PWD "/clojure.jar"),
  (Join-Path $PWD "jar-disassembly")) 
  # we extracted the jar to jar-disassembly, normally you don't ever manually extract a jar 
@@ -139,7 +138,7 @@ PS C:\Users\adas\clojure> tree jar-disassembly # let's see the general dir struc
  Usage: java [options] <mainclass> [args...]
             (to execute a class)
 ...
- PS C:\Users\adas\clojure> # this didn't do anything, we have to indicade a class <mainclass> to run
+# but this didn't do anything, we have to indicade a class <mainclass> to run
 
  PS C:\Users\adas\clojure> java -cp clojure.jar clojure.main
  Clojure 1.8.0
@@ -291,8 +290,7 @@ other=> user/m ;; we could still access the old m by namespace-qualifying our sy
 
 other=> (ns user) ;;ok back to user
 
-user=> ; libraries in Clojure will come in their own namespaces, Clojure ships with some built-in ones
-
+; libraries in Clojure will come in their own namespaces, Clojure ships with some built-in ones
 user=> (require 'clojure.string) ;; unloaded namespaces have to be required first, like clojure.string
 nil
 
@@ -338,6 +336,7 @@ PS C:\Users\adas\clojure> echo "" > main.clj  #;create main.clj
 PS C:\Users\adas\clojure> ./main.clj #
 ;should open main.clj in your text editor, or it might as you to pick a program
 ;if you don't have a text editor just pick Notepad, it'll do for now
+;IMPORTANT if your editor saves it as UTF-16 (like VSCode likes to), you could run into issues
 ```
 In `main.clj`:
 ```clojure
@@ -349,8 +348,7 @@ In `main.clj`:
 
 In PowerShell:
 ```powershell
-PS C:\Users\adas\clojure> #now we'll also add current directory (".") to the classpath so java can find main.clj
-
+#now we'll also add current directory (".") to the classpath so java can find main.clj
 PS C:\Users\adas\clojure> java -cp "clojure.jar;." clojure.main
 
 user=> (require 'main)
@@ -361,7 +359,7 @@ user=> main/nine
 ```
 Don't quit the REPL, but let's change our file a little bit:
 ```clojure
-;; main.clj
+;; main.clj      again, remember to save
 (ns main)
 
 (def nine 9)
@@ -396,9 +394,7 @@ That's where `lein` comes in<sup id="a3">[3](#f3)</sup>.
 It will fetch dependencies with __Maven__, generate a classpath and run `java`, so we don't have to manually craft a very complex `java` command by hand. And much, much more!
 
 # Getting lein
-As per [leiningen.org/#install](https://leiningen.org/#install) for windows we need to place [lein.bat](https://raw.githubusercontent.com/technomancy/leiningen/stable/bin/lein.bat) on our `PATH`.
-
-Now:
+As per [leiningen.org/#install](https://leiningen.org/#install) for windows we need to place [lein.bat](https://raw.githubusercontent.com/technomancy/leiningen/stable/bin/lein.bat) on our `PATH`:
 ```powershell
 PS C:\Users\adas\clojure> wget https://raw.githubusercontent.com/technomancy/leiningen/stable/bin/lein.bat -OutFile lein.bat
 
@@ -412,7 +408,8 @@ PS C:\Users\adas\clojure> $env:path+=";" + $PWD # temporarily add it to our path
 PS C:\Users\adas\clojure> lein # make sure it's availale now
 ... 
 
-PS C:\Users\adas\clojure> echo "" > project.clj # we create "project.clj" - it's a lot like npm's "package.json"
+# we create "project.clj" - it's a lot like npm's "package.json"
+PS C:\Users\adas\clojure> echo "" > project.clj 
 
 PS C:\Users\adas\clojure> project.clj # should open project.clj in your default editor
 
@@ -474,11 +471,16 @@ OpenJDK 64-Bit Server VM 11.0.1+13
     Exit: Control+D or (exit) or (quit)
  Results: Stored in vars *1, *2, *3, an exception in *e
 
+;; you'll there's a lot more output when starting this repl
+;; by default lein loads nREPL - a much more feature packed REPL
+;; but for now we don't need to know much about this
+
 user=> (require 'main) ;; still works
 hello world
 nil
 
-user=> (require '[net.cgrand.enlive-html :as html]) ;; confirm that we have enlive on our classpath as per https://github.com/cgrand/enlive#quickstart-tutorial
+;; confirm that we have enlive on our classpath as per https://github.com/cgrand/enlive#quickstart-tutorial
+user=> (require '[net.cgrand.enlive-html :as html]) 
 nil ; we do!
  
 ```
@@ -507,10 +509,13 @@ main=> url
 main=> (require '[main :reload :all])
 "https://dev.to" ;; ok, all is good now
 
-main=> (def document (enlive/html-resource (java.net.URL. url))) ;; this will fetch the page and parse it
+;; this will fetch the page and parse it
+main=> (def document (enlive/html-resource (java.net.URL. url))) 
 #'main/document
 
-main=> (def headers (enlive/select document [:.single-article :h3])) ;;how this works is beyond the scope of this guide, but it's basically like running document.querySelectorAll(".single-article > h3")
+;; how this works is beyond the scope of this guide
+;; but it's basically like running document.querySelectorAll(".single-article > h3")
+main=> (def headers (enlive/select document [:.single-article :h3])) 
 
 main=> (first headers)
 {:tag :h3, :attrs nil, :content ("...")}
@@ -526,20 +531,52 @@ main=> (s/split sample-headline #"[\n ]+")
 
 main=> (s/split sample-headline #"[\n :]+")
 ["" "Freelancing" "11" "How" "to" "get" "started"]
+;; uh we don' want that ""
+;; but we're also not smart enough to make a better regexp
+;; let's hack something togather
+
+;; an identity returns it's input, it basically does nothing
+main=> (identity 3)
+3
+
+;; filter applies a function to every element in a collection
+;; and removes any elements that return falsy values
+main=> (filter identity [1 2 3 nil false ""])
+(1 2 3 "")
+
+main=> (not-empty "string")
+"string"
+main=> (not-empty "")
+nil
 
 main=> (filter not-empty (s/split sample-headline #"[\n :]+"))
 ("Freelancing" "11" "How" "to" "get" "started")
+;;if you're confused a javascript equivalent for above would be:
+;; " Freelancing 11: How to get started".split(/[\n ]+/).filter(x=>x)   empty strings are falsy in js so no need for not-empty
 
-main=> (= ((comp first :content) sample-headline) (first (:content sample-headline)))
-true
+;; instead of applying content and then applying first
+;; we can compose these two functions into one with comp:
+main=> ((comp first :content) (first headers))
+"\n              Freelancing 11: How to get started\n            "
 
-main=> (require '[clojure.pprint :refer [pprint]]) ;; lets get ourselves a pretty printing fn - pprint, we'll be looking at a lot of data, might get messy
+;; lets get ourselves a pretty printing function - pprint
+;; we'll be looking at a lot of data, might get messy
+main=> (require '[clojure.pprint :refer [pprint]])
 
+;; now we're doing the same thing for all headers with map
+;; map applies a function to every element of a collection
+;; and returns a new collection with each result
 main=> (pprint (map (comp first :content) headers))
 ("\n              Freelancing 11: How to get started\n            "
- "\n            \n  The UX design pyramid with the user needs\n\n        "
+ "\n            \n  The UX design pyramid with the user needs\n\n        \"
 ...
 
+;; let's turn our piece of code that splits strings into words into a function
+;; we create function tokenize that takes one argument s
+main=> (defn tokenize [s] (filter not-empty (s/split s #"[\n :]+")))
+#'main/tokenize
+
+;; so now for every header we call :content, then call first, and then tokenize
 main=> (pprint (map (comp tokenize first :content) headers))
 (("Freelancing" "11" "How" "to" "get" "started")
  ("The" "UX" "design" "pyramid" "with" "the" "user" "needs")
@@ -547,32 +584,37 @@ main=> (pprint (map (comp tokenize first :content) headers))
  ("Using" "API" "first" "and" "TDD" "for" "your" "next" "library")
  ("7"
 
+;;now let's flatten these word lists into one
 main=> (pprint (flatten (map (comp tokenize first :content) headers)))
 ("Freelancing"
  "11"
  "How"
  "to"
 
+;; we're very lucky, clojure already comes with a function frequencies
+;; it returns a map, maping values to the times they occur in a collection
 main=> (pprint (frequencies (flatten (map (comp tokenize first :content) headers))))
 {"Interviews" 1,
  "Why" 1,
 ...}
-
-main=> ;; this is getting a little unwieldy, using a ->> "thread last macro" we can rewrite it as:
-
+;; our code is getting really ugly, nested function applications don't look pretty
+;; using a ->> "thread last macro"
+;; we can rewrite it in a way reads a little more naturally
 main=> (->> headers (map (comp tokenize first :content)) flatten frequencies pprint)
 {"Interviews" 1,
  "Why" 1,
-...} ;; works, but what's going on???
+...} 
+;; it works, but what's going on???
 ;; ->> is a macro, for complete docs see (https://clojuredocs.org/clojure.core/-%3E%3E)
 ;; we can can examine what a macro expands to by doing macroexpand:
 main=> (macroexpand '(->> headers (map (comp tokenize first :content)) flatten frequencies pprint)) 
 (pprint (frequencies (flatten (map (comp tokenize first :content) headers)))) ;; exactly like before!
 ;; note how we had to quote the argument to macroexpand with '
 ;; quoting stops any evaluation from happening, so we can treat this piece of code as data
+;; don't worry if it's still confusing, eventually it'll become second nature
 
-main=> (->> headers (map (comp tokenize first :content)) flatten frequencies pprint) ;so we know how this works now
-
+;; so now all we need to do is sort our results
+;; again, clojure already has a neat function - sort-by (detailed docs https://clojuredocs.org/clojure.core/sort-by)
 main=> (->> headers (map (comp tokenize first :content)) flatten frequencies (sort-by val) pprint)
 (...
  ["Gift" 2]
@@ -617,7 +659,7 @@ Let's clean up our `main.clj` now that we're almost done:
        (sort-by val)))
 
 (defn print-top-words []
-  (doseq [w top-words]
+  (doseq [w top-words] ;; doseq is like forEach in javascript 
     (println (key w) (val w))))
 
 (defn -main [] ;; we will explain this shortly
@@ -631,7 +673,7 @@ main=> (require '[main :reload :all])
 nil
 main=> (print-top-words)
 Interviews 1
-... ;NICE!
+... ;NICE! Ctrl+D out of the REPL
 ```
 
 Let's tell `lein` that main is our entry-point namespace:
@@ -692,7 +734,8 @@ PS C:\Users\adas\clojure> lein jar # we can build a jar of our code
 Compiling main
 Created C:\Users\adas\clojure\target\devto-words-0.0.1.jar
 
-PS C:\Users\adas\clojure> java -jar C:\Users\adas\clojure\target\devto-words-0.0.1.jar # we can't run this jar because it contains just our code, Clojure itself isn't included
+PS C:\Users\adas\clojure> java -jar C:\Users\adas\clojure\target\devto-words-0.0.1.jar 
+# we can't run this jar because it contains just our code, Clojure itself isn't included
 Exception in thread "main" java.lang.NoClassDefFoundError: clojure/lang/Var
         at main.<clinit>(Unknown Source)
 Caused by: java.lang.ClassNotFoundException: clojure.lang.Var
@@ -701,11 +744,13 @@ Caused by: java.lang.ClassNotFoundException: clojure.lang.Var
         at java.base/java.lang.ClassLoader.loadClass(ClassLoader.java:521)
         ... 1 more
 
-PS C:\Users\adas\clojure> lein uberjar # so instead we can build a fat jar containing everything needed to run our program
+# instead we can build a fat jar containing everything needed to run our program
+PS C:\Users\adas\clojure> lein uberjar 
 ...
 Created C:\Users\adas\clojure\target\devto-words-0.0.1-standalone.jar
 
-PS C:\Users\adas\clojure> java -jar C:\Users\adas\clojure\target\devto-words-0.0.1-standalone.jar # should work as expected now
+# should work as expected now
+PS C:\Users\adas\clojure> java -jar C:\Users\adas\clojure\target\devto-words-0.0.1-standalone.jar 
 
 PS C:\Users\adas\clojure> lein install # install will install our project into the local maven repo, so now in a different project we could put [devto-words "0.0.1"] into the dependencies and it would work
 ...
