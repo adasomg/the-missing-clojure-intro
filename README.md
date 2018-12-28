@@ -1,5 +1,5 @@
 # The Missing Clojure Intro (Windows-centric)
-Clojure promises __unprecedented productivity__. Clojure devs boast top salaries.  
+Clojure promises __unprecedented productivity__. Its devs boast __top salaries__.  
 It's true! But before you ever get to that point you'll face __unprecedented confusion__.  
 Understanding Clojure's tooling __is very challenging__.  
 
