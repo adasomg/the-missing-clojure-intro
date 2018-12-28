@@ -1,4 +1,4 @@
-# The Missing Clojure Intro (Windows) [originally published here](https://dev.to/adasomg/10-life-changing-minutes-with-clojure-windows-3ofl)
+# The Missing Clojure Intro (Windows) [originally on dev.to](https://dev.to/adasomg/10-life-changing-minutes-with-clojure-windows-3ofl)
 Clojure promises __unprecedented productivity__. Its devs boast __top salaries__.  
 It's true! But before you ever get to that point you'll face __unprecedented confusion__.  
 Understanding Clojure's tooling __is very challenging__.  
@@ -866,6 +866,7 @@ Otherwise I won't know and you'll never see a similar guide from me again 😭
 ## links
 - [Clojure cheatsheet - always have this open, the function you're looking for is probably on this list](https://clojure.org/api/cheatsheet)
 - [Clojurians slack - if you have a problem they'll probably help you out if you ask](https://clojurians.slack.com/)
+- [ClojureVerse - a Clojure forum, beginner friendly](https://clojureverse.org/)
 - [Sample project.clj showing lein's many features by example](https://github.com/technomancy/leiningen/blob/master/sample.project.clj)
 - [lein's FAQ](https://github.com/technomancy/leiningen/blob/stable/doc/FAQ.md)
 - [ClojureDocs.org](https://clojuredocs.org)
@@ -879,7 +880,9 @@ Otherwise I won't know and you'll never see a similar guide from me again 😭
 - [Cursive - a dedicated Clojure IDE, probably the best out-of-the-box experience](https://cursive-ide.com/)
 - [Cider - Emacs Clojure IDE](https://docs.cider.mx/en/latest/)
 - [Enlive quickstart](https://github.com/cgrand/enlive#quickstart-tutorial)
+
 ## footnotes
+
 <b id="f1">1</b> Yes, these PowerShell commands are weird. But they enable this guide to work even on the most basic Windows machine. No extra software needed. [↩](#a1)  
 
 <b id="f2">2</b> [What is Maven?](https://maven.apache.org/what-is-maven.html) [↩](#a2)   
