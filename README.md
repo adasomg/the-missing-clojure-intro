@@ -334,7 +334,7 @@ user=> (resolve 'split) ; still nicely resolves to the real deal
 user=> (require 'main) ; what if we require a non-existent namespace?
 FileNotFoundException Could not locate main__init.class or main.clj on classpath.  clojure.lang.RT.load (RT.java:456)
 
-;; interesting, so java was looking for main.class or main.clj on the classpath
+;; interesting, so java was looking for main__init.class or main.clj on the classpath
 ;; so what if there actually was main.clj on the class path?
 ;; let's add it, unfortunately this means we have to Ctrl-C out of here
 
@@ -531,6 +531,7 @@ main=> (def document (enlive/html-resource (java.net.URL. url)))
 ;; but it's basically like running document.querySelectorAll(".single-article > h3") or $$(".single-article > h3") on a webpage
 ;; it should get us all the right headline elements from dev.to
 main=> (def headers (enlive/select document [:.single-article :h3])) 
+;; again (pprint headers) if curious
 
 main=> (first headers)
 {:tag :h3, :attrs nil, :content ("...")}
@@ -590,6 +591,10 @@ main=> (pprint (map (comp first :content) headers))
 main=> (defn tokenize [s] (filter not-empty (s/split s #"[\n :]+")))
 #'main/tokenize
 
+;; verify that it still works (remember you should be retyping!)
+main=> (tokenize " a test sentence ")
+("a" "test" "sentence") ;; it does!
+
 ;; so now for every header we call :content, then call first, and then tokenize
 main=> (pprint (map (comp tokenize first :content) headers))
 (("Freelancing" "11" "How" "to" "get" "started")
@@ -598,7 +603,7 @@ main=> (pprint (map (comp tokenize first :content) headers))
  ("Using" "API" "first" "and" "TDD" "for" "your" "next" "library")
  ("7"
 
-;;now let's flatten these word lists into one
+;; now let's flatten these word lists into one
 main=> (pprint (flatten (map (comp tokenize first :content) headers)))
 ("Freelancing"
  "11"
@@ -606,14 +611,14 @@ main=> (pprint (flatten (map (comp tokenize first :content) headers)))
  "to"
 
 ;; we're very lucky, clojure already comes with a function frequencies
-;; it returns a map, maping values to the times they occur in a collection
+;; it returns a map, mapping values to the times they occur in a collection
 main=> (pprint (frequencies (flatten (map (comp tokenize first :content) headers))))
 {"Interviews" 1,
  "Why" 1,
 ...}
-;; our code is getting really ugly, nested function applications don't look pretty
-;; using a ->> "thread last macro"
-;; we can rewrite it in a way reads a little more naturally
+;; our code is getting really ugly, so many function applications don't look pretty
+;; Clojure has a ->> "thread last macro"
+;; we can use it to rewrite in a way reads a little more naturally
 main=> (->> headers (map (comp tokenize first :content)) flatten frequencies pprint)
 {"Interviews" 1,
  "Why" 1,
@@ -646,7 +651,6 @@ main=> (->> headers (map (comp tokenize first :content)) flatten frequencies (so
  ;; yay this is what we wanted all along, 
  ;; we could improve our tokenize to exclude words like the, a, of...
  ;; but we'll leave this as an exercise for the reader
-
 ``` 
 
 Let's clean up our `main.clj` now that we're almost done:
