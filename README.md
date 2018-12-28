@@ -331,9 +331,10 @@ FileNotFoundException Could not locate main__init.class or main.clj on classpath
 ;; so what if there actually was main.clj on the class path?
 ;; let's add it, unfortunately this means we have to Ctrl-C out of here
 
-PS C:\Users\adas\clojure> echo "" > main.clj  #;create main.clj
+;; create main.clj
+PS C:\Users\adas\clojure> echo "" > main.clj  
 
-PS C:\Users\adas\clojure> ./main.clj #
+PS C:\Users\adas\clojure> ./main.clj
 ;; should open main.clj in your text editor, or it might ask you to pick a program
 ;; if you don't have a text editor just pick Notepad, it'll do for now
 ;; WARNING editors like VSCode like to use UTF-16, please save as UTF-8 to avoid issues
@@ -346,9 +347,9 @@ In `main.clj`:
 (def nine 9)
 ```
 
-In PowerShell:
-```powershell
-# now we'll also add current directory (".") to the classpath so java can find main.clj
+Back to PowerShell:
+```clojure
+;; now we'll also add current directory (".") to the classpath so java can find main.clj
 PS C:\Users\adas\clojure> java -cp "clojure.jar;." clojure.main
 
 user=> (require 'main)
