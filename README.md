@@ -775,12 +775,12 @@ Wrote C:\Users\adas\clojure\pom.xml
 Installed jar and pom into local repo.
 
 # the last lein feature we'll explore is "new", it generates scaffoldings for new projects.
-PS C:\Users\adas> lein new my-project
+PS C:\Users\adas\clojure> lein new my-project
 Generating a project called my-project based on the 'default' template.
 The default template is intended for library projects, not applications.
 To see other templates (app, plugin, etc), try `lein help new`.
 
-PS C:\Users\adas> tree /F my-project
+PS C:\Users\adas\clojure> tree /F my-project
 ...
 │   .gitignore
 │   .hgignore
