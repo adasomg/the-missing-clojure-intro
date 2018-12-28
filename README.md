@@ -509,7 +509,7 @@ Back to the REPL:
 user=> (require '[main :reload :all]) 
 nil
 
-user=> (ns main) ; let's set our REPL to main
+user=> (ns main) ; let's set our namespace to main
 nil
 
 main=> url
@@ -524,9 +524,11 @@ main=> url
 ;; this will fetch the page and parse it (let's not concern ourselves with how it works)
 main=> (def document (enlive/html-resource (java.net.URL. url))) 
 #'main/document
+;; if you really want to see what's in there (pprint document), it'll print A LOT of stuff
+
 
 ;; again how this works is beyond the scope of this guide
-;; but it's basically like running document.querySelectorAll(".single-article > h3") or $$(".single-article > h3")
+;; but it's basically like running document.querySelectorAll(".single-article > h3") or $$(".single-article > h3") on a webpage
 ;; it should get us all the right headline elements from dev.to
 main=> (def headers (enlive/select document [:.single-article :h3])) 
 
