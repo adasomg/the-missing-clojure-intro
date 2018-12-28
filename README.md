@@ -460,7 +460,7 @@ PS C:\Users\adas\clojure> mv main.clj src/ # move our main.clj to src/, remember
 PS C:\Users\adas\clojure> src/main.clj # should open main.clj at it's new location
 ```
 
-Now when we start the REPL with `lein` it will first download our dependencies from Maven Central et al.<sup id="a4">[4](#f4)</sup>, put them on java's classpath, and finally start the REPL:
+Now when we start the REPL with `lein` it will first download our dependencies from Maven Central et al.<sup id="a5">[5](#f5)</sup>, put them on java's classpath, and finally start the REPL:
 ```clojure
 PS C:\Users\adas\clojure> lein repl # like I promised, lein is downloading dependencies first
 Retrieving org/clojure/clojure/1.8.0/clojure-1.8.0.pom from central
@@ -838,7 +838,7 @@ Otherwise I won't know and you'll never see a similar guide from me again 😭
 <b id="f2">2</b> [What is Maven?](https://maven.apache.org/what-is-maven.html) [↩](#a2)   
 
 <b id="f3">3</b> There are efforts to move away from lein, towards more lightweight solutions.
-[See this](https://clojure.org/guides/deps_and_cli). But from a learner's perspective they suffer from the same shortcomings. They assume knowledge of the java ecosystem. Whether you end up using lein or something else, all the lessons you learn here apply. And for the time being you'll mostly see people use lein.[↩](#a3)  
+[See this](https://clojure.org/guides/deps_and_cli). But from a learner's perspective they suffer from the same shortcomings. Knowledge of the java ecosystem is assumed. Whether you end up using lein or something else, all the lessons you learn here apply. And for the time being you'll mostly see people use lein.[↩](#a3)  
 
 <b id="f4">4</b> You probably want to use Clojure version `1.10.0` (current [Stable Release](https://clojure.org/community/downloads)) in a real project.  
 This guide uses `1.8.0` as newer versions depend on [clojure.spec](https://clojure.org/about/spec) which isn't bundled in Clojure's JAR. Downloading [clojure.spec](https://clojure.org/about/spec) and adding it to the classpath would add unnecessary complexity to this guide.  
