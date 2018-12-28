@@ -813,7 +813,12 @@ PS C:\Users\adas\clojure> java -cp 'C:\Users\adas\clojure\test;C:\Users\adas\clo
 ;C:\Users\adas\clojure\target\classes;C:\Users\adas\.m2\repository\org\clojure\clojure\1.8.0\clojure-1.8.0.jar;C:\Users\
 adas\.m2\repository\enlive\enlive\1.1.6\enlive-1.1.6.jar;C:\Users\adas\.m2\repository\org\ccil\cowan\tagsoup\tagsoup\1.2
 .1\tagsoup-1.2.1.jar;C:\Users\adas\.m2\repository\org\jsoup\jsoup\1.7.2\jsoup-1.7.2.jar' main
-Will print top words in a sec... # ok it works!
+Will print top words in a sec... 
+# ok it works!
+# note how this time instead of running class clojure.main we ran main
+# this corresponds to the main namespace we worked on (clojure.main would start a REPL like before)
+# if you noticed, in our final cleanup we added (:gen-class) to the ns form
+# this makes sure a corresponding Java class is generated for our namespace
 
 # the last lein feature we'll explore is "new", it generates scaffoldings for new projects.
 PS C:\Users\adas\clojure> lein new my-project
