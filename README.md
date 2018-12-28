@@ -1,5 +1,5 @@
 # The Missing Clojure Intro (Windows-centric)
-Clojure promises __unprecedented productivity__.  
+Clojure promises __unprecedented productivity__. Clojure devs boast top salaries.  
 It's true! But before you ever get to that point you'll face __unprecedented confusion__.  
 Understanding Clojure's tooling __is very challenging__.  
 
@@ -830,7 +830,8 @@ Otherwise I won't know and you'll never see a similar guide from me again 😭
 - [lein's FAQ](https://github.com/technomancy/leiningen/blob/stable/doc/FAQ.md)
 - [ClojureDocs.org](https://clojuredocs.org)
 - [Docs on the java classpath](https://docs.oracle.com/javase/8/docs/technotes/tools/windows/classpath.html)
-- [Comprehensive docs on the many commands that ship with the JDK](https://docs.oracle.com/javase/9/tools/tools-and-command-reference.htm#JSWOR596)
+- [Official docs on the many commands that ship with the JDK](https://docs.oracle.com/javase/9/tools/tools-and-command-reference.htm#JSWOR596)
+- [Official docs on what JARs really are](https://docs.oracle.com/javase/tutorial/deployment/jar/basicsindex.html)
 - [Official Clojure getting started docs](https://clojure.org/guides/getting_started)
 - [What is Maven?](https://maven.apache.org/what-is-maven.html)
 - [Clojars repository](https://clojars.org/)
