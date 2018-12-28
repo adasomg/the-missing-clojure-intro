@@ -91,7 +91,7 @@ So let's get a JAR for Clojure.
  ```powershell
  PS C:\Users\adas\clojure> wget http://repo1.maven.org/maven2/org/clojure/clojure/1.8.0/clojure-1.8.0.jar -OutFile clojure.jar
 
-# let's take a quick peak inside the jar
+# let's take a quick peek inside the jar
 # (notice how we use a function for extracting Zip Files, because JARs are just Zips)
  PS C:\Users\adas\clojure> [System.IO.Compression.ZipFile]::ExtractToDirectory((Join-Path $PWD "/clojure.jar"),
  (Join-Path $PWD "jar-disassembly")) 
@@ -131,7 +131,7 @@ PS C:\Users\adas\clojure> tree jar-disassembly # let's see the general dir struc
   # this is JVM's (Java Virtual Machine) standard format for bytecode
   # also note how everything is nested in directories
   # as we'll later see directories are very important in the Java world
-  # to make use of our jar we need to put it on java's "classpath", it's like our systems PATH but for java
+  # to make use of our jar we need to put it on java's "classpath", it's like our system's PATH but for java
 
  PS C:\Users\adas\clojure> java -cp clojure.jar
  ...
@@ -166,7 +166,7 @@ user=> "Back to the Clojure REPL"
 50
 
  user=> (+ 50 1) ;; this invokes function + with arguments 50 and 1
- 60
+ 51
 
  user=> (type 60) ;; a Clojure number is just a java.lang.Long
  java.lang.Long
@@ -192,22 +192,26 @@ user=> (v 0) ;; but this is weird, a vector itself is also a function! A functio
 user=> (second v)
 "vector"
 
- user=> (def m {:key "value", :another-key "almost like js right?"}) ;; now this is a "map" literal, it's very similar to JavaScript's object literals
+;; now this is a "map" literal, it's very similar to JavaScript's object literals
+ user=> (def m {:key "value", :another-key "almost like js right?"}) 
 #'user/m
 
 user=> m
-{:key "value", :another-key "almost-like js right?"}
+{:key "value", :another-key "almost like js right?"}
 
 user=> (type m)
 clojure.lang.PersistentArrayMap
 
-user=> :key ;; but a key, unlike javascript, isn't just notational sugar, a key, keyword actually, is a first-class concept in clojure
+;; but a key, unlike javascript, isn't just notational sugar, 
+;; a key, keyword actually, is a first-class value type in clojure
+user=> :key 
 :key
 
 user=> (type :key)
 clojure.lang.Keyword
 
-user=> {1 "val"} ;; Clojure maps take any basic Clojure values as keys, they don't have to be keywords
+;; Clojure maps take any basic Clojure values as keys, they don't have to be keywords
+user=> {1 "val"} 
 {1 "val"}
 
 user=> {[1 2] "val"} ;; even vectors work
@@ -225,7 +229,9 @@ user=> ({[1 2] "val"} [1 2])
 user=> (:key m) ;; :keywords are also invokable as a function! this is also rougly equivalent to (get m :key)
 "value"
 
-user=> (1 {1 "val"}) ;; but other simple types aren't, you can invoke a number as a funcion, this is why :keywords are the preffered keys for a map
+;; but other simple types aren't, you can invoke a number as a funcion
+;; this is one of the reasons why :keywords are the prefered type for map keys
+user=> (1 {1 "val"}) 
 ClassCastException class java.lang.Long cannot be cast to class clojure.lang.IFn 
 
 user=> (first {:key "value"}) ;; so what's the "first" elemnt of a map?
@@ -262,16 +268,17 @@ nil ; nil as in nothing - we cannot resolve a-symbol to anything
 user=> (type #'user/m) ;; so what is #'user/m
 clojure.lang.Var ;; a var
 
-user=> 'user/m ; this is a symbol too
-user/m  ;;what's this "user" part?
+user=> 'user/m ;; this is a symbol too
+user/m  ;; what's this "user" part?
 
-user=> (namespace 'user/m) ;; user is a namespace, the "namespace-qualified" symbol user/m has namespace "user"
+;; user is a namespace, the "namespace-qualified" symbol user/m has namespace "user"
+user=> (namespace 'user/m) 
 "user"
 
 user=> (name 'user/m) ;; and name "m"
 "m"
 
-user=> (namespace 'm) ;a bare symbol "m" isn't "namespace-qualified", hence nil
+user=> (namespace 'm) ;; a bare symbol "m" isn't "namespace-qualified", hence nil
 nil
 
 ;; namespaces are a very important concept in clojure, everything exists in a namespace
@@ -331,13 +338,12 @@ FileNotFoundException Could not locate main__init.class or main.clj on classpath
 ;; so what if there actually was main.clj on the class path?
 ;; let's add it, unfortunately this means we have to Ctrl-C out of here
 
-;; create main.clj
-PS C:\Users\adas\clojure> echo "" > main.clj  
+;; create main.clj - we explicitly set the encoding because some (like UTF16) may cause issues
+PS C:\Users\adas\clojure> Out-File -Encoding ASCII main.clj
 
 PS C:\Users\adas\clojure> ./main.clj
 ;; should open main.clj in your text editor, or it might ask you to pick a program
 ;; if you don't have a text editor just pick Notepad, it'll do for now
-;; WARNING editors like VSCode like to use UTF-16, please save as UTF-8 to avoid issues
 ```
 In `main.clj`:
 ```clojure
@@ -410,7 +416,7 @@ PS C:\Users\adas\clojure> lein # make sure it's available now
 ... 
 
 # we create "project.clj" - it's a lot like npm's "package.json"
-PS C:\Users\adas\clojure> echo "" > project.clj 
+PS C:\Users\adas\clojure> Out-File -Encoding ASCII project.clj
 
 PS C:\Users\adas\clojure> ./project.clj 
 # should open project.clj in your default editor
@@ -424,25 +430,25 @@ In `project.clj`:
 ```
 This defines a project `devto-words` version `0.0.1` with no dependencies.  
 First we'd like to pull in Clojure itself, right?  
-We need to add `[org.clojure/clojure "1.1.0"]` to our dependencies. "clojure" and  "1.9.0" makes sense, but why the `org.clojure` namespace?   
-When lein interprets our dependencies it will use the namespace `org.clojure` as a Maven `groupId`, name `clojure` as `artifactId` and `"1.1.0"` represents `version`.
+We need to add `[org.clojure/clojure "1.8.0"]`<sup id="a4">[4](#f4)</sup> to our dependencies. "clojure" and  "1.8.0" makes sense, but why the `org.clojure` namespace?   
+When lein interprets our dependencies it will use the namespace `org.clojure` as a Maven `groupId`, name `clojure` as `artifactId` and `"1.8.0"` represents `version`.
 
-If we go to [Maven Central's search page](https://search.maven.org/)<sup id="a4">[4](#f4)</sup> and [look for "clojure"](https://search.maven.org/artifact/org.clojure/clojure/1.10.0/jar) you can confirm that there is indeed such an artifact, a full xml spec is given:
+If we go to [Maven Central's search page](https://search.maven.org/)<sup id="a5">[5](#f5)</sup> and [look for "clojure"](https://search.maven.org/artifact/org.clojure/clojure/1.8.0/jar) you can confirm that there is indeed such an artifact, a full xml spec is given:
 ```xml
 <dependency>
   <groupId>org.clojure</groupId>
   <artifactId>clojure</artifactId>
-  <version>1.1.0</version>
+  <version>1.8.0</version>
 </dependency>
 ```
-This is what lein will understand the dependency vector `[org.clojure/clojure "1.9.0"]` to mean.
+This is what lein will understand the dependency vector `[org.clojure/clojure "1.8.0"]` to mean.
 
 [Enlive's](https://github.com/cgrand/enlive#artifact) github README [already gives us a lein-style dependency vector](https://github.com/cgrand/enlive#artifact): `[enlive "1.1.6"]`. Great!  
 So if we add Clojure and enlive our project.clj should end up looking like this:
 ```clojure
 ;; C:\Users\adas\clojure\project.clj
 (defproject devto "0.0.1"
-  :dependencies [[org.clojure/clojure "1.9.0"]
+  :dependencies [[org.clojure/clojure "1.8.0"]
                  [enlive "1.1.6"]])
 ```
 By default `lein` adds the `src` directory to the java classpath and it's considered a standard practice, so:
@@ -457,12 +463,12 @@ PS C:\Users\adas\clojure> src/main.clj # should open main.clj at it's new locati
 Now when we start the REPL with `lein` it will first download our dependencies from Maven Central et al.<sup id="a4">[4](#f4)</sup>, put them on java's classpath, and finally start the REPL:
 ```clojure
 PS C:\Users\adas\clojure> lein repl # like I promised, lein is downloading dependencies first
-Retrieving org/clojure/clojure/1.9.0/clojure-1.9.0.pom from central
+Retrieving org/clojure/clojure/1.8.0/clojure-1.8.0.pom from central
 ...
 nREPL server started on port 56786 on host 127.0.0.1 - nrepl://127.0.0.1:56786
 ...
 REPL-y 0.4.3, nREPL 0.5.3
-Clojure 1.9.0
+Clojure 1.8.0
 OpenJDK 64-Bit Server VM 11.0.1+13
     Docs: (doc function-name-here)
           (find-doc "part-of-name-here")
@@ -686,7 +692,7 @@ Let's tell `lein` that main is our entry-point namespace:
 ```clojure
 ;; C:\users\adas\clojure\project.clj
 (defproject devto-words "0.0.1"
-  :dependencies [[org.clojure/clojure "1.9.0"]
+  :dependencies [[org.clojure/clojure "1.8.0"]
                  [enlive "1.1.6"]]
   :main main)
 ```
@@ -768,7 +774,7 @@ We didn't learn much Clojure.
 But we learned many little details that most won't guides won't teach you.  
 Now you can continue learning with confidence.  
 
-Look at <sup id="a5">[footnote 5](#f5)</sup> if you want to make this installation permanent.  
+Look at <sup id="a6">[footnote 6](#f6)</sup> if you want to make this installation permanent.  
 Checkout the links for __where to go next__.   
 
 # Thank me
@@ -801,14 +807,16 @@ Otherwise I won't know and you'll never see a similar guide from me again 😭
 <b id="f3">3</b> There are efforts to move away from lein, towards more lightweight solutions.
 [See this](https://clojure.org/guides/deps_and_cli). But from a learner's perspective they suffer from the same shortcomings. They assume knowledge of the java ecosystem. Whether you end up using lein or something else, all the lessons you learn here apply. And for the time being you'll mostly see people use lein.[↩](#a3)  
 
-<b id="f4">4</b> __Maven Central__ is Maven's main repository. 
+<b id="f4">4</b> You probably want to use Clojure version `1.10.0` (current [Stable Release](https://clojure.org/community/downloads)) in a real project. This guide uses `1.8.0` for [reasons discussed here](https://github.com/adasomg/the-missing-clojure-intro/issues/2).[↩](#a4)
+
+<b id="f5">5</b> __Maven Central__ is Maven's main repository. 
 But unlike _npm_, the _Maven_ world relies less on a single repository. 
 In fact most Clojure libraries are hosted on [clojars](https://clojars.org/) rather than Maven Central.
 Even cooler than that when you use Maven your own computer also works essentially like a repository.
 If you're developing locally you can install artifacts into your local repo and it all works. 
-`lein install` will do exactly that.[↩](#a4)
+`lein install` will do exactly that.[↩](#a5)  
 
-<b id="f5">5</b>
+<b id="f6">6</b>
 If you want to make our java and lein installation permanent, move `java11` to a better location like `C:\java11` and `lein.bat` to somewhere like `C:\lein\lein.bat` then add `C:\java11\bin` and `C:\lein` to your PATH.  
 If you don't know how to do that on Windows press `Win+R`, type `rundll32 sysdm.cpl,EditEnvironmentVariables` and press Enter. Under `System Variables` select `Path` and press `Edit`.
 
@@ -837,7 +845,10 @@ PS C:\Users\adas> lein
 # don't need this anymore
 PS C:\Users\adas> rm clojure 
 ```
-[↩](#a5)
+[↩](#a6)
 
-## very misc links
+## Miscellaneous links
 - [A tutorial on the PowerShell ZipFile stuff](https://blogs.technet.microsoft.com/heyscriptingguy/2015/08/14/working-with-compressed-files-in-powershell-5/)
+
+# Credits
+[Andy Fingerhut](https://github.com/jafingerhut) for [spotting crucial errors](https://github.com/adasomg/the-missing-clojure-intro/issues/1) and [making great suggestions](https://github.com/adasomg/the-missing-clojure-intro/issues/2).
