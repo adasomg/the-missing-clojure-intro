@@ -864,22 +864,28 @@ Otherwise I won't know and you'll never see a similar guide from me again 😭
 # Links & footnotes
 
 ## links
+### learning materials
 - [Clojure cheatsheet - always have this open, the function you're looking for is probably on this list](https://clojure.org/api/cheatsheet)
+- [ClojureDocs.org](https://clojuredocs.org)
+- [Official Clojure getting started docs](https://clojure.org/guides/getting_started)
+### community
 - [Clojurians slack - if you have a problem they'll probably help you out if you ask](https://clojurians.slack.com/)
 - [ClojureVerse - a Clojure forum, beginner friendly](https://clojureverse.org/)
+### lein
 - [Sample project.clj showing lein's many features by example](https://github.com/technomancy/leiningen/blob/master/sample.project.clj)
 - [lein's FAQ](https://github.com/technomancy/leiningen/blob/stable/doc/FAQ.md)
-- [ClojureDocs.org](https://clojuredocs.org)
-- [Docs on the java classpath](https://docs.oracle.com/javase/8/docs/technotes/tools/windows/classpath.html)
-- [Official docs on the many commands that ship with the JDK](https://docs.oracle.com/javase/9/tools/tools-and-command-reference.htm#JSWOR596)
-- [Official docs on what JARs really are](https://docs.oracle.com/javase/tutorial/deployment/jar/basicsindex.html)
-- [Official Clojure getting started docs](https://clojure.org/guides/getting_started)
-- [What is Maven?](https://maven.apache.org/what-is-maven.html)
-- [Clojars repository](https://clojars.org/)
+### editors & plugins
 - [Clava - a Clojure extension for VS code ](https://marketplace.visualstudio.com/items?itemName=cospaia.clojure4vscode)
 - [Cursive - a dedicated Clojure IDE, probably the best out-of-the-box experience](https://cursive-ide.com/)
 - [Cider - Emacs Clojure IDE](https://docs.cider.mx/en/latest/)
 - [Enlive quickstart](https://github.com/cgrand/enlive#quickstart-tutorial)
+### Misc & Java-related
+- [What is Maven?](https://maven.apache.org/what-is-maven.html)
+- [Clojars repository](https://clojars.org/)
+- [Official docs on java's classpath](https://docs.oracle.com/javase/8/docs/technotes/tools/windows/classpath.html)
+- [Official docs on the many commands that ship with the JDK](https://docs.oracle.com/javase/9/tools/tools-and-command-reference.htm#JSWOR596)
+- [Official docs on what JARs really are](https://docs.oracle.com/javase/tutorial/deployment/jar/basicsindex.html)
+- [A tutorial on the PowerShell ZipFile stuff](https://blogs.technet.microsoft.com/heyscriptingguy/2015/08/14/working-with-compressed-files-in-powershell-5/)
 
 ## footnotes
 
@@ -932,9 +938,6 @@ PS C:\Users\adas> lein
 PS C:\Users\adas> rm clojure 
 ```
 [↩](#a6)
-
-## Miscellaneous links
-- [A tutorial on the PowerShell ZipFile stuff](https://blogs.technet.microsoft.com/heyscriptingguy/2015/08/14/working-with-compressed-files-in-powershell-5/)
 
 # Credits
 [Andy Fingerhut](https://github.com/jafingerhut) for [spotting crucial errors](https://github.com/adasomg/the-missing-clojure-intro/issues/1) and [making great suggestions](https://github.com/adasomg/the-missing-clojure-intro/issues/2).
