@@ -33,7 +33,7 @@ author of Clojure and CTO Cognitect
 
 But what is it really?  
 On the most fundamental level Clojure is just a Java program.  
-Before we even begin we should get `java`.  
+Before we begin we need to get `java`.  
 
 # Getting Java
 
