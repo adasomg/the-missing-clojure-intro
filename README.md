@@ -767,7 +767,9 @@ Created C:\Users\adas\clojure\target\devto-words-0.0.1-standalone.jar
 # should work as expected now
 PS C:\Users\adas\clojure> java -jar C:\Users\adas\clojure\target\devto-words-0.0.1-standalone.jar 
 
-PS C:\Users\adas\clojure> lein install # install will install our project into the local maven repo, so now in a different project we could put [devto-words "0.0.1"] into the dependencies and it would work
+# lein install installs our project into the local Maven repo (usually located at ~/.m2/repository)
+# allowing us to depend on [devto-words "0.0.1"] in other projects on our machine
+PS C:\Users\adas\clojure> lein install
 ...
 Wrote C:\Users\adas\clojure\pom.xml
 Installed jar and pom into local repo.
