@@ -155,7 +155,7 @@ Built-By: hudson
 Build-Jdk: 1.6.0_20
 Main-Class: clojure.main
 
-# so if we do -jar instead, java will use automatically run Main-Class clojure.main
+# so if we do -jar instead, java will automatically run Main-Class - clojure.main
 PS C:\Users\adas\clojure> java -jar clojure.jar 
  ...
 user=> "Back to the Clojure REPL (read, eval, print loop)"
