@@ -698,7 +698,7 @@ PS C:\Users\adas\clojure> lein run #this will load main and run main/-main now
 Interviews 1
 ...
 ```
-Finally let's clean up a bit:
+Final `main.clj` cleanup:
 ```clojure
 (ns main ;; checkout https://clojuredocs.org/clojure.core/ns to understand what happened here
   (:gen-class)
