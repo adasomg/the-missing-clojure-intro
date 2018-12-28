@@ -530,7 +530,7 @@ main=> (def document (enlive/html-resource (java.net.URL. url)))
 
 
 ;; again how this works is beyond the scope of this guide
-;; but it's basically like running document.querySelectorAll(".single-article > h3") or $$(".single-article > h3") on a webpage
+;; but it's basically like running document.querySelectorAll(".single-article h3") or $$(".single-article h3") on a webpage
 ;; it should get us all the right headline elements from dev.to
 main=> (def headers (enlive/select document [:.single-article :h3])) 
 ;; again (pprint headers) if curious
