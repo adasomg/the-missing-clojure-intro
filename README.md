@@ -868,6 +868,7 @@ Otherwise I won't know and you'll never see a similar guide from me again 😭
 - [Clojure cheatsheet - always have this open, the function you're looking for is probably on this list](https://clojure.org/api/cheatsheet)
 - [ClojureDocs.org](https://clojuredocs.org)
 - [Official Clojure getting started docs](https://clojure.org/guides/getting_started)
+- [Enlive quickstart](https://github.com/cgrand/enlive#quickstart-tutorial)
 ### community
 - [Clojurians slack - if you have a problem they'll probably help you out if you ask](https://clojurians.slack.com/)
 - [ClojureVerse - a Clojure forum, beginner friendly](https://clojureverse.org/)
@@ -878,7 +879,6 @@ Otherwise I won't know and you'll never see a similar guide from me again 😭
 - [Clava - a Clojure extension for VS code ](https://marketplace.visualstudio.com/items?itemName=cospaia.clojure4vscode)
 - [Cursive - a dedicated Clojure IDE, probably the best out-of-the-box experience](https://cursive-ide.com/)
 - [Cider - Emacs Clojure IDE](https://docs.cider.mx/en/latest/)
-- [Enlive quickstart](https://github.com/cgrand/enlive#quickstart-tutorial)
 ### Misc & Java-related
 - [What is Maven?](https://maven.apache.org/what-is-maven.html)
 - [Clojars repository](https://clojars.org/)
