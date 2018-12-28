@@ -31,8 +31,8 @@ I hope you find Clojure's combination of facilities elegant, powerful, practical
 Rich Hickey <br/>
 author of Clojure and CTO Cognitect
 
-But what is it really?  
-On the most fundamental level Clojure is just a Java program.  
+But what is it __really__?  
+On the most fundamental level Clojure is just __a Java program__.  
 Before we begin we need to get `java`.  
 
 # Getting Java
@@ -49,7 +49,7 @@ PS C:\Users\adas> mkdir clojure
 
 PS C:\Users\adas> cd clojure
 
-#187MB download
+# 187MB download
 PS C:\Users\adas\clojure> wget https://download.java.net/java/GA/jdk11/13/GPL/openjdk-11.0.1_windows-x64_bin.zip -OutFile java11.zip
 # might take a minute or two to download. OpenJDK is almost exactly like Oracle's JDK, 
 # for our purposes there's no real difference.
@@ -98,7 +98,8 @@ So let's get a JAR for Clojure.
  # we extracted the jar to jar-disassembly, normally you don't ever manually extract a jar 
  # but we really want to see what's inside
 
-PS C:\Users\adas\clojure> tree jar-disassembly # let's see the general dir structure
+# let's see the general dir structure
+PS C:\Users\adas\clojure> tree jar-disassembly 
 ...
 ├───clojure
 │   ├───asm
@@ -113,7 +114,8 @@ PS C:\Users\adas\clojure> tree jar-disassembly # let's see the general dir struc
         └───org.clojure
             └───clojure
 
- PS C:\Users\adas\clojure> tree /F jar-disassembly # now let's see full paths
+# now let's see full paths
+ PS C:\Users\adas\clojure> tree /F jar-disassembly 
  ...
 │   │       PersistentHashMap$INode.class
 │   │       PersistentHashMap$NodeIter.class
