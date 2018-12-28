@@ -129,12 +129,12 @@ PS C:\Users\adas\clojure> tree jar-disassembly
 │   │       PersistentList$Primordial.class
 │   │       PersistentList.class
 ...
-  # interesting, mostly a lot of .class files
-  # this is JVM's (Java Virtual Machine) standard format for bytecode
-  # also note how everything is nested in directories
-  # as we'll later see directories are very important in the Java world
-  # to make use of our jar we need to put it on java's "classpath", it's like our system's PATH but for java
-
+ # interesting, mostly a lot of .class files
+ # this is JVM's (Java Virtual Machine) standard format for bytecode
+ # also note how everything is nested in directories
+ # as we'll later see directories are very important in the Java world
+  
+ # to make use of our jar we need to put it on java's "classpath", it's like our system's PATH but for java
  PS C:\Users\adas\clojure> java -cp clojure.jar
  ...
  Usage: java [options] <mainclass> [args...]
