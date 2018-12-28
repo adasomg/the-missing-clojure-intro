@@ -142,8 +142,8 @@ PS C:\Users\adas\clojure> tree jar-disassembly # let's see the general dir struc
 
  PS C:\Users\adas\clojure> java -cp clojure.jar clojure.main
  Clojure 1.8.0
- user=> "Nice, clojure.main starts a Clojure REPL!"
-"Nice, clojure.main starts a Clojure REPL!"
+ user=> "Nice, clojure.main starts a Clojure REPL! (Read, Eval, Print Loop)"
+"Nice, clojure.main starts a Clojure REPL! (Read, Eval, Print Loop)"
  user=> "Let's Ctrl-C out of here"
 
 # Actually JAR's META-INF/MANIFEST.MF will usually specify a default Main-Class, here clojure.main
@@ -158,8 +158,8 @@ Main-Class: clojure.main
 # so if we do -jar instead, java will automatically run Main-Class - clojure.main
 PS C:\Users\adas\clojure> java -jar clojure.jar 
  ...
-user=> "Back to the Clojure REPL (read, eval, print loop)"
-"Back to the Clojure REPL (read, eval, print loop)"
+user=> "Back to the Clojure REPL"
+"Back to the Clojure REPL"
  ```
  ```clojure
  user=> 50 ;; <= this is a number literal
