@@ -491,6 +491,9 @@ Without exiting the REPL let's make some changes to `main.clj`:
 
 (require '[net.cgrand.enlive-html :as enlive])
 (require '[clojure.string :as s])
+;; let's require ourselves a pretty printing function - pprint
+;; we'll be looking at a lot of data, might get messy
+(require '[clojure.pprint :refer [pprint]])
 
 (def url "http://dev.to")
 ```
@@ -512,21 +515,23 @@ nil
 main=> url
 "https://dev.to" ;; ok, all is good now
 
-;; this will fetch the page and parse it
+;; this will fetch the page and parse it (let's not concern ourselves with how it works)
 main=> (def document (enlive/html-resource (java.net.URL. url))) 
 #'main/document
 
-;; how this works is beyond the scope of this guide
-;; but it's basically like running document.querySelectorAll(".single-article > h3")
+;; again how this works is beyond the scope of this guide
+;; but it's basically like running document.querySelectorAll(".single-article > h3") or $$(".single-article > h3")
 ;; it should get us all the right headline elements from dev.to
 main=> (def headers (enlive/select document [:.single-article :h3])) 
 
 main=> (first headers)
 {:tag :h3, :attrs nil, :content ("...")}
 
-main=> (first (:content (first headers)))
+main=> (first (:content (first headers))) 
 "\n              Freelancing 11: How to get started\n            "
+;; what a nasty string
 
+;; let's put the string in a variable so it's easier to work with
 main=> (def sample-headline (first (:content (first headers))))
 #'main/sample-headline
 
@@ -548,24 +553,21 @@ main=> (identity 3)
 main=> (filter identity [1 2 3 nil false ""])
 (1 2 3 "") ;; note that both nil and false are "falsy" values in Clojure
 
-main=> (not-empty "string") ;; not-empty  returns it's input if it's not empty
+main=> (not-empty "string") ;; not-empty returns it's input if it's not empty
 "string"
+
 main=> (not-empty "") ;; but returns nil if it is
 nil
 
 main=> (filter not-empty (s/split sample-headline #"[\n :]+"))
 ("Freelancing" "11" "How" "to" "get" "started")
-;;if you're confused a javascript equivalent for above would be:
+;; if you're confused a javascript equivalent for above would be:
 ;; " Freelancing 11: How to get started".split(/[\n ]+/).filter(x=>x)   empty strings are falsy in js so no need for not-empty
 
 ;; instead of doing (first (:content (first headers)))
-;; we can compose the two functions into one with comp:
+;; we can compose the two functions into one with comp
 main=> ((comp first :content) (first headers))
 "\n              Freelancing 11: How to get started\n            "
-
-;; let's get ourselves a pretty printing function - pprint
-;; we'll be looking at a lot of data, might get messy
-main=> (require '[clojure.pprint :refer [pprint]])
 
 ;; now we're doing the same thing for all headers with map
 ;; map applies a function to every element of a collection
