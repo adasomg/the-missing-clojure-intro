@@ -16,7 +16,7 @@ Follow along carefully, don't skip any parts, __faithfully execute every command
 Copy-and-paste PowerShell commands<sup id="a1">[1](#f1)</sup>, but when evaluating Clojure __please retype yourself!__  
 In __only 10 minutes__ you'll be spared __weeks of frustration__.
 
-Open up a PowerShell (press Win, type `powershell` and press Enter). Please, __don't close it till the end__.  
+Open up a PowerShell (press `Windows key`, type `powershell` then press `Enter`). Please, __don't close it till the end__.  
 Ok, let's get started!
 
 # What is Clojure
@@ -809,8 +809,8 @@ If you're developing locally you can install artifacts into your local repo and 
 `lein install` will do exactly that.[↩](#a4)
 
 <b id="f5">5</b>
-If you want to make our java and lein installation permanent, move `java11` to a better location like `C:\java11` and `lein.bat` to somewhere like `C:\lein\lein.bat` and add `C:\java11\bin` and `C:\lein` to your PATH.  
-If you don't know how to do that on Windows press Win+R, type `rundll32 sysdm.cpl,EditEnvironmentVariables` and press Enter. Then under `System Variables` you can select Path and press Edit.
+If you want to make our java and lein installation permanent, move `java11` to a better location like `C:\java11` and `lein.bat` to somewhere like `C:\lein\lein.bat` then add `C:\java11\bin` and `C:\lein` to your PATH.  
+If you don't know how to do that on Windows press `Win+R`, type `rundll32 sysdm.cpl,EditEnvironmentVariables` and press Enter. Under `System Variables` select `Path` and press `Edit`.
 
 Example:
 ```powershell
