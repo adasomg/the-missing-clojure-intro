@@ -817,8 +817,6 @@ Example:
 # you need to open this powershell prompt as an Administrator
 PS C:\Windows\system32> cd ~
 
-PS C:\Users\adas> cd clojure
-
 PS C:\Users\adas\clojure>
 
 PS C:\Users\adas\clojure> mv java11 C:\java11
@@ -828,17 +826,16 @@ PS C:\Users\adas\clojure> mkdir C:\lein
 PS C:\Users\adas\clojure> mv lein.bat C:\lein\
 
 # should open the right windows menu for you
-# Select Path under System Variables, click Edit and add C:\java11\bin and C:\lein
+# Select Path under System Variables, click Edit then add C:\java11\bin and C:\lein
 PS C:\Users\adas\clojure> rundll32 sysdm.cpl,EditEnvironmentVariables 
 
-#restart powershell to reload PATH....
+# restart powershell to reload PATH....
 # make sure java and lein works
 PS C:\Users\adas> java
-
 PS C:\Users\adas> lein
 
-PS C:\Users\adas> rm clojure #don't need this anymore
-# done
+# don't need this anymore
+PS C:\Users\adas> rm clojure 
 ```
 [↩](#a5)
 
