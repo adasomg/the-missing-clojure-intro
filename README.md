@@ -431,7 +431,7 @@ In `project.clj`:
 This defines a project `devto-words` version `0.0.1` with no dependencies.  
 First we'd like to pull in Clojure itself, right?  
 We need to add `[org.clojure/clojure "1.8.0"]`<sup id="a4">[4](#f4)</sup> to our dependencies. "clojure" and  "1.8.0" makes sense, but why the `org.clojure` namespace?   
-When lein interprets our dependencies it will use the namespace `org.clojure` as a Maven `groupId`, name `clojure` as `artifactId` and `"1.8.0"` represents `version`.
+When lein interprets our dependencies it will use the namespace `org.clojure` as a Maven `groupId`, name `clojure` as `artifactId` and `"1.8.0"` as `version`.
 
 If we go to [Maven Central's search page](https://search.maven.org/)<sup id="a5">[5](#f5)</sup> and [look for "clojure"](https://search.maven.org/artifact/org.clojure/clojure/1.8.0/jar) you can confirm that there is indeed such an artifact, a full xml spec is given:
 ```xml
@@ -444,14 +444,14 @@ If we go to [Maven Central's search page](https://search.maven.org/)<sup id="a5"
 This is what lein will understand the dependency vector `[org.clojure/clojure "1.8.0"]` to mean.
 
 [Enlive's](https://github.com/cgrand/enlive#artifact) github README [already gives us a lein-style dependency vector](https://github.com/cgrand/enlive#artifact): `[enlive "1.1.6"]`. Great!  
-So if we add Clojure and enlive our project.clj should end up looking like this:
+So if we add Clojure and enlive, our project.clj should end up looking like this:
 ```clojure
 ;; C:\Users\adas\clojure\project.clj
 (defproject devto "0.0.1"
   :dependencies [[org.clojure/clojure "1.8.0"]
                  [enlive "1.1.6"]])
 ```
-By default `lein` adds the `src` directory to the java classpath and it's considered a standard practice, so:
+By default `lein` adds `src` to java's classpath, having your code under `src` is a standard practice, so:
 ```powershell
 PS C:\Users\adas\clojure> mkdir src # make directory src
 
