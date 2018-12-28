@@ -851,7 +851,7 @@ PS C:\Users\adas\clojure> tree /F my-project
 # Thank you
 We didn't learn much Clojure.  
 But we learned many little details that most won't guides won't teach you.  
-Now you can continue learning with confidence.  
+Now you can continue learning with confidence. You __already understand the confusing parts__, congrats!
 
 Look at <sup id="a6">[footnote 6](#f6)</sup> if you want to make this installation permanent.  
 Checkout the links for __where to go next__.   
