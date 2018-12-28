@@ -404,7 +404,7 @@ Downloading Leiningen now...
 
 PS C:\Users\adas\clojure> ./lein.bat # should work now
 ...
-PS C:\Users\adas\clojure> $env:path+=";" + $PWD # temporarily add it to our path so it's available everywhere
+PS C:\Users\adas\clojure> $env:path+=";" + $PWD # temporarily add it to our PATH so it's available everywhere
 
 PS C:\Users\adas\clojure> lein # make sure it's available now
 ... 
@@ -412,8 +412,8 @@ PS C:\Users\adas\clojure> lein # make sure it's available now
 # we create "project.clj" - it's a lot like npm's "package.json"
 PS C:\Users\adas\clojure> echo "" > project.clj 
 
-PS C:\Users\adas\clojure> ./project.clj # should open project.clj in your default editor
-
+PS C:\Users\adas\clojure> ./project.clj 
+# should open project.clj in your default editor
 ```
 
 In `project.clj`:
@@ -425,7 +425,7 @@ In `project.clj`:
 This defines a project `devto-words` version `0.0.1` with no dependencies.  
 First we'd like to pull in Clojure itself, right?  
 We need to add `[org.clojure/clojure "1.1.0"]` to our dependencies. "clojure" and  "1.9.0" makes sense, but why the `org.clojure` namespace?   
-When lein interprets our dependencies it will use the namespace `org.clojure` as a Maven `groupId`, name `clojure` as `artifactId` and `"1.1.0"` will become `version`.
+When lein interprets our dependencies it will use the namespace `org.clojure` as a Maven `groupId`, name `clojure` as `artifactId` and `"1.1.0"` represents `version`.
 
 If we go to [Maven Central's search page](https://search.maven.org/)<sup id="a4">[4](#f4)</sup> and [look for "clojure"](https://search.maven.org/artifact/org.clojure/clojure/1.10.0/jar) you can confirm that there is indeed such an artifact, a full xml spec is given:
 ```xml
@@ -506,7 +506,10 @@ nil
 main=> url
 "http://dev.to" ;; oops we actually wanted https not http, change it in main.clj
 
-main=> (require '[main :reload :all])
+main=> (require '[main :reload :all]) ;; reload our changes
+nil
+
+main=> url
 "https://dev.to" ;; ok, all is good now
 
 ;; this will fetch the page and parse it
