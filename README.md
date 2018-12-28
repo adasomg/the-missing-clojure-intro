@@ -1,14 +1,14 @@
 # The Missing Clojure Intro (Windows-centric)
 Clojure promises __unprecedented productivity__.  
 It's true! But before you ever get to that point you'll face __unprecedented confusion__.  
-Understanding Clojure's tooling __is VERY challenging__.  
+Understanding Clojure's tooling __is very challenging__.  
 
 Most guides push you straight into writing Clojure and don't bother explaining the __complex foundations__.
 
 This is different.  
 I will __NEVER__ tell you to go do something yourself.
 You'll be able to complete this guide __100% uninterrupted__ on any recent Windows setup.
-__ZERO foreknowledge required!__ Nothing will be installed permanently!
+__ZERO knowledge required!__ Nothing will be installed permanently!
 
 We'll get java, talk about java stuff (JARs, the classpath, Maven), play around in Clojure's REPL, install lein, explain what lein really does, and make a simple Clojure program that counts most frequent words in [dev.to](https://dev.to) headlines.
 
