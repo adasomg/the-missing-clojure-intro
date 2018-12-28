@@ -824,9 +824,9 @@ Otherwise I won't know and you'll never see a similar guide from me again 😭
 # Links & footnotes
 
 ## links
-- [Clojurians slack - if you have a problem they'll probably help you out if you ask](https://clojurians.slack.com/)
 - [Clojure cheatsheet - always have this open, the function you're looking for is probably on this list](https://clojure.org/api/cheatsheet)
-- [Sample project.clj file showing the many thing lein can do](https://github.com/technomancy/leiningen/blob/master/sample.project.clj)
+- [Clojurians slack - if you have a problem they'll probably help you out if you ask](https://clojurians.slack.com/)
+- [Sample project.clj showing lein's many features by example](https://github.com/technomancy/leiningen/blob/master/sample.project.clj)
 - [lein's FAQ](https://github.com/technomancy/leiningen/blob/stable/doc/FAQ.md)
 - [ClojureDocs.org](https://clojuredocs.org)
 - [Docs on the java classpath](https://docs.oracle.com/javase/8/docs/technotes/tools/windows/classpath.html)
@@ -834,8 +834,8 @@ Otherwise I won't know and you'll never see a similar guide from me again 😭
 - [Official Clojure getting started docs](https://clojure.org/guides/getting_started)
 - [What is Maven?](https://maven.apache.org/what-is-maven.html)
 - [Clojars repository](https://clojars.org/)
-- [Clava - clj extension for VS code ](https://marketplace.visualstudio.com/items?itemName=cospaia.clojure4vscode)
-- [Cursive - a dedicated Clojure IDE, probably the best OTOB experience](https://cursive-ide.com/)
+- [Clava - a Clojure extension for VS code ](https://marketplace.visualstudio.com/items?itemName=cospaia.clojure4vscode)
+- [Cursive - a dedicated Clojure IDE, probably the best out-of-the-box experience](https://cursive-ide.com/)
 - [Cider - Emacs Clojure IDE](https://docs.cider.mx/en/latest/)
 - [Enlive quickstart](https://github.com/cgrand/enlive#quickstart-tutorial)
 ## footnotes
@@ -855,15 +855,14 @@ __To reiterate__ - __use__ `[org.clojure/clojure "1.10.0"]` next time.[↩](#a4)
 <b id="f5">5</b> __Maven Central__ is Maven's main repository. 
 But unlike _npm_, the _Maven_ world relies less on a single repository. 
 In fact most Clojure libraries are hosted on [clojars](https://clojars.org/) rather than Maven Central.
-Even cooler than that when you use Maven your own computer also works essentially like a repository.
-If you're developing locally you can install artifacts into your local repo and it all works. 
+Even cooler, when you use Maven, your machine also has its local Maven repository.  
+You can install artifacts into your local repo and it works just like remote ones. 
 `lein install` will do exactly that.[↩](#a5)  
 
 <b id="f6">6</b>
-If you want to make our java and lein installation permanent, move `java11` to a better location like `C:\java11` and `lein.bat` to somewhere like `C:\lein\lein.bat` then add `C:\java11\bin` and `C:\lein` to your PATH.  
-If you don't know how to do that on Windows press `Win+R`, type `rundll32 sysdm.cpl,EditEnvironmentVariables` and press Enter. Under `System Variables` select `Path` and press `Edit`.
+If you want to make our java and lein installations permanent, move `java11` to a better location like `C:\java11` and `lein.bat` to, say, `C:\lein\lein.bat` then add `C:\java11\bin` and `C:\lein` to your PATH.  
 
-Example:
+Don't know how to do that? See this example:
 ```powershell
 # you need to open this powershell prompt as an Administrator
 PS C:\Windows\system32> cd ~
