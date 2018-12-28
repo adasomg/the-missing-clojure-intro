@@ -73,7 +73,7 @@ PS C:\Users\adas\clojure> java11\bin\java -version # make sure the binary works
 openjdk version "11.0.1" 318-1-16 # it does
 ...
 
-# temporarily update our enviornment PATH variable so we can access java everywhere
+# temporarily update our environment PATH variable so we can access java everywhere
 PS C:\Users\adas\clojure> $env:path+=";" + (Join-Path $PWD  "java11\bin") 
 
 PS C:\Users\adas\clojure> java -version # did it work?
@@ -138,7 +138,7 @@ PS C:\Users\adas\clojure> tree jar-disassembly # let's see the general dir struc
  Usage: java [options] <mainclass> [args...]
             (to execute a class)
 ...
-# but this didn't do anything, we have to indicade a class <mainclass> to run
+# but this didn't do anything, we have to indicate a class <mainclass> to run
 
  PS C:\Users\adas\clojure> java -cp clojure.jar clojure.main
  Clojure 1.8.0
@@ -220,21 +220,21 @@ user=> {[1 2] "val"} ;; even vectors work
 user=> (get m :key) ;; get takes a collection and a key and returns a value
 "value"
 
-user=> (m :key) ;; like vectors, maps are also invokable as a funcion, this is rougly equivalent to (get m :key)
+user=> (m :key) ;; like vectors, maps are also invokable as a function, this is roughly equivalent to (get m :key)
 "value"
 
 user=> ({[1 2] "val"} [1 2])
 "val"
 
-user=> (:key m) ;; :keywords are also invokable as a function! this is also rougly equivalent to (get m :key)
+user=> (:key m) ;; :keywords are also invokable as a function! this is also roughly equivalent to (get m :key)
 "value"
 
-;; but other simple types aren't, you can invoke a number as a funcion
-;; this is one of the reasons why :keywords are the prefered type for map keys
+;; but other simple types aren't, you can invoke a number as a function
+;; this is one of the reasons why :keywords are the preferred type for map keys
 user=> (1 {1 "val"}) 
 ClassCastException class java.lang.Long cannot be cast to class clojure.lang.IFn 
 
-user=> (first {:key "value"}) ;; so what's the "first" elemnt of a map?
+user=> (first {:key "value"}) ;; so what's the "first" element of a map?
 [:key "value"] ;; a vector containing the first key/val?
 
 user=> (type (first {:key "value"})) 
@@ -253,10 +253,10 @@ user=> (val (first {:key "value"})) ;; and this
 user=> 'a-symbol ;; this is a "quoted" symbol
 a-symbol ;; why did we "quote" it?
 
-user=> a-symbol ;; if we don't Clojure will try to "resolve" the symbol and retreive it's value
+user=> a-symbol ;; if we don't Clojure will try to "resolve" the symbol and retrieve it's value
 CompilerException java.lang.RuntimeException: Unable to resolve symbol: a-symbol in this context
 
-user=> m ;; m doesn't throw becuase we've previously defined m 
+user=> m ;; m doesn't throw because we've previously defined m 
 {:key "value", :another-key "almost like js right?"}
 
 user=> (resolve 'm) ;; we can manually resolve m
@@ -286,7 +286,7 @@ user=> *ns* ;; special symbol *ns* contains the current namespace
 #object[clojure.lang.Namespace 0xf8908f6 "user"]
 
 ;; this is why we're seeing this "user" thing in our REPL indicating the current namespace
-user=> (ns other) ;; we jump to a differnt ns
+user=> (ns other) ;; we jump to a different ns
 nil
 
 other=> m ;; m is undefined here
@@ -453,7 +453,7 @@ So if we add Clojure and enlive our project.clj should end up looking like this:
 ```
 By default `lein` adds the `src` directory to the java classpath and it's considered a standard practice, so:
 ```powershell
-PS C:\Users\adas\clojure> mkdir src # make diresctory src
+PS C:\Users\adas\clojure> mkdir src # make directory src
 
 PS C:\Users\adas\clojure> mv main.clj src/ # move our main.clj to src/, remember to close main.clj in your editor
 
@@ -640,7 +640,10 @@ main=> (->> headers (map (comp tokenize first :content)) flatten frequencies (so
  ["to" 3]
  ["of" 4]
  ["How" 4]
- ["the" 5]) ; yay this is what we wanted all along, we could improve our tokenize to exclude some of these common english filler words but let's ignore that, this is good enough
+ ["the" 5]) 
+ ;; yay this is what we wanted all along, 
+ ;; we could improve our tokenize to exclude words like the, a, of...
+ ;; but we'll leave this as an exercise for the reader
 
 ``` 
 
@@ -714,7 +717,7 @@ Final `main.clj` cleanup:
 
 (def url "https://dev.to")
 
-;; turn everything into functions so we only fetch stuff when acually calling print-top-words rather than on load 
+;; turn everything into functions so we only fetch stuff when actually calling print-top-words rather than on load 
 (defn fetch-document [] 
   (enlive/html-resource (java.net.URL. url)))
 
@@ -807,7 +810,11 @@ Otherwise I won't know and you'll never see a similar guide from me again 😭
 <b id="f3">3</b> There are efforts to move away from lein, towards more lightweight solutions.
 [See this](https://clojure.org/guides/deps_and_cli). But from a learner's perspective they suffer from the same shortcomings. They assume knowledge of the java ecosystem. Whether you end up using lein or something else, all the lessons you learn here apply. And for the time being you'll mostly see people use lein.[↩](#a3)  
 
-<b id="f4">4</b> You probably want to use Clojure version `1.10.0` (current [Stable Release](https://clojure.org/community/downloads)) in a real project. This guide uses `1.8.0` for [reasons discussed here](https://github.com/adasomg/the-missing-clojure-intro/issues/2).[↩](#a4)
+<b id="f4">4</b> You probably want to use Clojure version `1.10.0` (current [Stable Release](https://clojure.org/community/downloads)) in a real project.  
+This guide uses `1.8.0` as newer versions depend on [clojure.spec](https://clojure.org/about/spec) which isn't bundled in Clojure's JAR. Downloading [clojure.spec](https://clojure.org/about/spec) and adding it to the classpath would add unnecessary complexity to this guide.  
+As you learned `lein` does all that for you. But for consistency we still used `1.8.0`.  
+So if you change `1.8.0` to `1.10.0` in `project.clj` it'll work just fine.  
+__To reiterate__ - __use__ `[org.clojure/clojure "1.10.0"]` next time.[↩](#a4)
 
 <b id="f5">5</b> __Maven Central__ is Maven's main repository. 
 But unlike _npm_, the _Maven_ world relies less on a single repository. 
