@@ -794,7 +794,7 @@ Otherwise I won't know and you'll never see a similar guide from me again 😭
 - [Cider - Emacs Clojure IDE](https://docs.cider.mx/en/latest/)
 - [Enlive quickstart](https://github.com/cgrand/enlive#quickstart-tutorial)
 ## footnotes
-<b id="f1">1</b> Yes, these PowerShell commands are weird. But they enables this guide to work even on the most basic Windows machine. No extra software needed. [↩](#a1)  
+<b id="f1">1</b> Yes, these PowerShell commands are weird. But they enable this guide to work even on the most basic Windows machine. No extra software needed. [↩](#a1)  
 
 <b id="f2">2</b> [What is Maven?](https://maven.apache.org/what-is-maven.html) [↩](#a2)   
 
