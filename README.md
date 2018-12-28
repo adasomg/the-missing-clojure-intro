@@ -782,6 +782,39 @@ PS C:\Users\adas\clojure> lein install
 Wrote C:\Users\adas\clojure\pom.xml
 Installed jar and pom into local repo.
 
+# to see a complete dependency tree for our project:
+PS C:\Users\adas\clojure> lein deps :tree
+ [clojure-complete "0.2.5" :exclusions [[org.clojure/clojure]]]
+ [enlive "1.1.6"]
+   [org.ccil.cowan.tagsoup/tagsoup "1.2.1"]
+   [org.jsoup/jsoup "1.7.2"]
+ [nrepl "0.5.3" :exclusions [[org.clojure/clojure]]]
+   [nrepl/bencode "1.0.0"]
+ [org.clojure/clojure "1.8.0"]
+# notice how enlive itself pulls in 2 dependencies
+# also we never asked for clojure-complete and nrepl
+# lein's default "profile" pulls in some extras
+
+# we can rerun deps :tree with a profile "provided" which should only have essentials
+PS C:\Users\adas\clojure> lein with-profile provided deps :tree
+ [enlive "1.1.6"]
+   [org.ccil.cowan.tagsoup/tagsoup "1.2.1"]
+   [org.jsoup/jsoup "1.7.2"]
+ [org.clojure/clojure "1.8.0"]
+# just what we asked for
+
+# let's see what a bare classpath looks like
+PS C:\Users\adas\clojure> lein with-profile provided classpath
+C:\Users\adas\clojure\test;C:\Users\adas\clojure\src;C:\Users\adas\clojure\resources;C:\Users\adas\clojure\target\classes;C:\Users\adas\.m2\repository\org\clojure\clojure\1.8.0\clojure-1.8.0.jar;C:\Users\adas\.m2\repository\enlive\enlive\1.1.6\enlive-1.1.6.jar;C:\Users\adas\.m2\repository\org\ccil\cowan\tagsoup\tagsoup\1.2.1\tagsoup-1.2.1.jar;C:\Users\adas\.m2\repository\org\jsoup\jsoup\1.7.2\jsoup-1.7.2.jar
+# mostly makes sense
+
+# but we like to double-check everything
+PS C:\Users\adas\clojure> java -cp 'C:\Users\adas\clojure\test;C:\Users\adas\clojure\src;C:\Users\adas\clojure\resources
+;C:\Users\adas\clojure\target\classes;C:\Users\adas\.m2\repository\org\clojure\clojure\1.8.0\clojure-1.8.0.jar;C:\Users\
+adas\.m2\repository\enlive\enlive\1.1.6\enlive-1.1.6.jar;C:\Users\adas\.m2\repository\org\ccil\cowan\tagsoup\tagsoup\1.2
+.1\tagsoup-1.2.1.jar;C:\Users\adas\.m2\repository\org\jsoup\jsoup\1.7.2\jsoup-1.7.2.jar' main
+Will print top words in a sec... # ok it works!
+
 # the last lein feature we'll explore is "new", it generates scaffoldings for new projects.
 PS C:\Users\adas\clojure> lein new my-project
 Generating a project called my-project based on the 'default' template.
