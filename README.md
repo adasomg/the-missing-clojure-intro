@@ -337,7 +337,7 @@ user=> (require 'main) ; what if we require a non-existent namespace?
 FileNotFoundException Could not locate main__init.class or main.clj on classpath.  clojure.lang.RT.load (RT.java:456)
 
 ;; interesting, so java was looking for main__init.class or main.clj on the classpath
-;; so what if there actually was main.clj on the class path?
+;; so what if there actually was main.clj on the classpath?
 ;; let's add it, unfortunately this means we have to Ctrl-C out of here
 
 ;; create main.clj - we explicitly set the encoding because some (like UTF16) may cause issues
@@ -432,7 +432,7 @@ In `project.clj`:
 ```
 This defines a project `devto-words` version `0.0.1` with no dependencies.  
 First we'd like to pull in Clojure itself, right?  
-We need to add `[org.clojure/clojure "1.8.0"]`<sup id="a4">[4](#f4)</sup> to our dependencies. "clojure" and  "1.8.0" makes sense, but why the `org.clojure` namespace?   
+We need to add `[org.clojure/clojure "1.8.0"]`<sup id="a4">[4](#f4)</sup> to our dependencies. `clojure` and  `"1.8.0"` makes sense, but why the `org.clojure` namespace?   
 When lein interprets our dependencies it will use the namespace `org.clojure` as a Maven `groupId`, name `clojure` as `artifactId` and `"1.8.0"` as `version`.
 
 If we go to [Maven Central's search page](https://search.maven.org/)<sup id="a5">[5](#f5)</sup> and [look for "clojure"](https://search.maven.org/artifact/org.clojure/clojure/1.8.0/jar) you can confirm that there is indeed such an artifact, a full xml spec is given:
