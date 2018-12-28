@@ -560,7 +560,7 @@ main=> (filter not-empty (s/split sample-headline #"[\n :]+"))
 main=> ((comp first :content) (first headers))
 "\n              Freelancing 11: How to get started\n            "
 
-;; lets get ourselves a pretty printing function - pprint
+;; let's get ourselves a pretty printing function - pprint
 ;; we'll be looking at a lot of data, might get messy
 main=> (require '[clojure.pprint :refer [pprint]])
 
