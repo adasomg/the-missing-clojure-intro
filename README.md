@@ -231,7 +231,7 @@ user=> ({[1 2] "val"} [1 2])
 user=> (:key m) ;; :keywords are also invokable as a function! this is also roughly equivalent to (get m :key)
 "value"
 
-;; but other simple types aren't, you can invoke a number as a function
+;; but other simple types aren't, you cannot invoke a number as a function
 ;; this is one of the reasons why :keywords are the preferred type for map keys
 user=> (1 {1 "val"}) 
 ClassCastException class java.lang.Long cannot be cast to class clojure.lang.IFn 
